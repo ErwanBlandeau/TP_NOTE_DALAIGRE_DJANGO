@@ -35,13 +35,32 @@ class Product(models.Model):
     price_ttc     = models.DecimalField(max_digits=8, decimal_places=2,  null=True, blank=True, verbose_name="Prix unitaire TTC")
     status        = models.SmallIntegerField(choices=PRODUCT_STATUS, default=0)
     date_creation = models.DateTimeField(blank=True, verbose_name="Date création") 
-    nombre_de_produit = models.DecimalField(max_digits=8, decimal_places=2,  null=True, blank=True, verbose_name="Nombre de produits")
+    nombre_de_produit = models.IntegerField(null=True, blank=True, verbose_name="Nombre de produits")
     #fields = '__all__'
     exclude = ('price_ttc', 'status')
     
     def __str__(self):
         return "{0} {1}".format(self.name, self.code)
+    
 
+"""
+Fournisseur : nom, code, etc.
+"""
+class Fournisseur(models.Model):
+
+    class Meta:
+        verbose_name = "Fournisseur"
+
+    name            = models.CharField(max_length=100, verbose_name="Nom du fournisseur")
+    code            = models.CharField(max_length=10, unique=True, verbose_name="Code du fournisseur")
+    email           = models.EmailField(max_length=100, verbose_name="Adresse email")
+    phone           = models.CharField(max_length=20, verbose_name="Numéro de téléphone", null=True, blank=True)
+    address         = models.TextField(null=True, blank=True, verbose_name="Adresse")
+    website         = models.URLField(max_length=200, null=True, blank=True, verbose_name="Site web")
+    produits        = models.ManyToManyField(Product, related_name="fournisseurs", verbose_name="Produits fournis")
+
+    def __str__(self):
+        return f"{self.name} - {self.code}"
 """
     Déclinaison de produit déterminée par des attributs comme la couleur, etc.
 """
