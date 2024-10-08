@@ -36,12 +36,15 @@ class Product(models.Model):
     status        = models.SmallIntegerField(choices=PRODUCT_STATUS, default=0)
     date_creation = models.DateTimeField(blank=True, verbose_name="Date création") 
     nombre_de_produit = models.IntegerField(null=True, blank=True, verbose_name="Nombre de produits")
+    fournisseur  = models.ManyToManyField("Fournisseur", related_name="produits", verbose_name="Fournisseurs")
     #fields = '__all__'
     exclude = ('price_ttc', 'status')
     
     def __str__(self):
         return "{0} {1}".format(self.name, self.code)
-    
+
+
+# ----------------- TP NOTEE -----------------
 
 """
 Fournisseur : nom, code, etc.

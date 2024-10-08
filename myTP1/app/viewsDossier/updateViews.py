@@ -6,9 +6,9 @@ from django.contrib.auth.models import User
 from django import forms
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
-from app.forms import ContactUsForm, ProductAttributeForm, ProductForm, ProductItemForm
+from app.forms import ContactUsForm, FournisseurForm, ProductAttributeForm, ProductForm, ProductItemForm
 from django.forms import BaseModelForm
-from ..models import Product, ProductAttribute, ProductItem
+from ..models import Fournisseur, Product, ProductAttribute, ProductItem
 
 class ProductUpdateView(UpdateView):
     model = Product
@@ -84,4 +84,27 @@ def ProductItemUpdate(request, id):
     return render(request,'product-update.html', {'form': form}) 
 
 
+# ----------------- TP NOTEE -----------------
 
+
+class FournisseurUpdateView(UpdateView):
+    model = Fournisseur
+    form_class = FournisseurForm
+    template_name = "update_total.html"
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        form.save()
+        return redirect('fournisseur-list')
+    
+    
+def FournisseurUpdate(request, id):
+    fournisseur = Fournisseur.objects.get(id=id)
+    if request.method == 'POST':
+        form = FournisseurForm(request.POST, instance=fournisseur)
+        if form.is_valid():
+            # mettre à jour le produit existant dans la base de données
+            form.save()
+            # rediriger vers la page détaillée du produit que nous venons de mettre à jour
+            return redirect('fournisseur-list')
+    else:
+        form = FournisseurForm(instance=fournisseur)
+    return render(request,'product-update.html', {'form': form})

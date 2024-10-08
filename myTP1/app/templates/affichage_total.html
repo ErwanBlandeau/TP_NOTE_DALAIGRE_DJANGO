@@ -114,27 +114,29 @@ Mon application DJANGO
     <thead>
         <th>Nom</th>
         <th>Code</th>
-        <th>Prix HT</th>
-        <th>Prix TTC</th>
-        <th>Nombre du produit</th>
-        <th>Date Création</th>
+        <th>email</th>
+        <th>phone</th>
+        <th>address</th>
+        <th>website</th>
         <th>Modifier</th>
-        <th>Supprimer</th>
+        <th>Supprimer</th>        
+        <th>Ajouter un produit</th>
+
     </thead>
     <tbody>
         {% for p in prdct %}
 
         <tr>
             <!-- <td><a href="/monapp/product/{{p.id}}">{{ p.name }}</a></td> -->
-            <td><a href="{% url 'product-detail' p.id %}">{{ p.name }}</a></td>
+            <td>{{ p.name }}</td>
             <td>{{ p.code }} </td>
-            <td>{{ p.price_ht }} </td>
-            <td>{{ p.price_ttc }} </td>
-            <td>{{ p.nombre_de_produit}}</td>
-            <td>{{ p.date_creation }} </td>
-            <td><a href="{% url 'product-update' p.id %}">modifier</a></td>
-            <td><a href="{% url 'product-delete' p.id %}">supprimer</a></td>
-
+            <td>{{ p.email }} </td>
+            <td>{{ p.phone }} </td>
+            <td>{{ p.address}}</td>
+            <td>voir le site : <a href="{{ p.website }}">ici</a></td>
+            <td><a href="{% url 'fournisseur-update' p.id %}">modifier</a></td>
+            <td><a href="{% url 'fournisseur-delete' p.id %}">supprimer</a></td>            
+            <td><a href="{% url 'fournisseur-delete' p.id %}">Ajouter un prosuit</a></td>
         </tr>
         {% endfor %}
 

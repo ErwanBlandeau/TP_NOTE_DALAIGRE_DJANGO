@@ -29,14 +29,34 @@ def ProductCreate(request):
         form = ProductForm()
     return render(request, "new_product.html", {'form': form})
 
+class ProductAttributeCreateView(CreateView):
+    model = ProductAttribute
+    form_class=ProductAttributeForm
+    template_name = "new_product.html"
+    
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        form.save()
+        return redirect('attribute-list')
+    
+class ProductItemCreateView(CreateView):
+    model = ProductItem
+    form_class = ProductItemForm
+    template_name = "new_product.html"
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        form.save()
+        return redirect('item-list')
+    
+
+# ----------------- TP NOTEE -----------------
+
 class FournisseurCreateView(CreateView):
     model = Fournisseur
     form_class = FournisseurForm
     template_name = "new_product.html"
     
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        product = form.save()
-        return redirect('product-detail', product.id)
+        form.save()
+        return redirect('fournisseur-list')
     
 def FournisseurCreate(request):
     form = FournisseurForm()
@@ -48,25 +68,4 @@ def FournisseurCreate(request):
     else:
         form = FournisseurForm()
     return render(request, "new_product.html", {'form': form})
-    
-
-class ProductAttributeCreateView(CreateView):
-    model = ProductAttribute
-    form_class=ProductAttributeForm
-    template_name = "new_product.html"
-    
-    def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        form.save()
-        return redirect('attribute-list')
-    
-    
-
-class ProductItemCreateView(CreateView):
-    model = ProductItem
-    form_class = ProductItemForm
-    template_name = "new_product.html"
-    def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        form.save()
-        return redirect('item-list')
-    
     
