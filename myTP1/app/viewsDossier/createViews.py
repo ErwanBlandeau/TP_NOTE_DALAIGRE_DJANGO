@@ -31,7 +31,7 @@ def ProductCreate(request):
 
 class FournisseurCreateView(CreateView):
     model = Fournisseur
-    form_class=FournisseurForm
+    form_class = FournisseurForm
     template_name = "new_product.html"
     
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
@@ -44,7 +44,7 @@ def FournisseurCreate(request):
         form = FournisseurForm(request.POST)
         if form.is_valid():
             product = form.save()
-            return redirect('product-detail', product.id)
+            return redirect('fournisseur-list')
     else:
         form = FournisseurForm()
     return render(request, "new_product.html", {'form': form})
