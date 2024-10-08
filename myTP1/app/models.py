@@ -35,7 +35,7 @@ class Product(models.Model):
     price_ttc     = models.DecimalField(max_digits=8, decimal_places=2,  null=True, blank=True, verbose_name="Prix unitaire TTC")
     status        = models.SmallIntegerField(choices=PRODUCT_STATUS, default=0)
     date_creation = models.DateTimeField(blank=True, verbose_name="Date création") 
-    nombre_de_produit = models.DecimalField(max_digits=8, decimal_places=2,  null=True, blank=True, verbose_name="Nombre de produits")
+    nombre_de_produit = models.IntegerField(null=True, blank=True, verbose_name="Nombre de produits")
     #fields = '__all__'
     exclude = ('price_ttc', 'status')
     
