@@ -68,9 +68,11 @@ urlpatterns = [
 
     # ListView
     path('fournisseur', views.FournisseurListView.as_view(), name="fournisseur-list"),
+    path('fournisseur/<pk>/product', views.ProductFournisseurListView.as_view(), name="fournisseur-product-list"),
 
     #Add
     path("fournisseur/add/",views.FournisseurCreateView.as_view(), name="fournisseur-add"),
+    path("fournisseur/<pk>/product/add/",views.ProductFournisseurCreateView.as_view(), name="fournisseur-product-add"),
 
     #Update
     path("fournisseur/<pk>/update/",views.FournisseurUpdateView.as_view(), name="fournisseur-update"),

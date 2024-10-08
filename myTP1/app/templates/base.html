@@ -29,36 +29,40 @@
           <li class="nav-item">
             <a class="nav-link user-select-none pe-auto" onclick="message()">Home</a>
           </li> 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="{% url 'contact' %}">Contact</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'about' %}">About</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="{% url 'product-list' %}">Produits</a>
           </li>
-          <li class="nav-item"></li>
+          <!-- <li class="nav-item"></li>
             <a class="nav-link" href="{% url 'item-list' %}"> Item</a>
           </li>
           <li class="nav-item"></li>
             <a class="nav-link" href="{% url 'attribute-list' %}">attributs</a>
+          </li> -->
+          <li class="nav-item"></li>
+            <a class="nav-link" href="{% url 'product-add' %}">Ajouter un produit</a>
           </li>
           <li class="nav-item"></li>
             <a class="nav-link" href="{% url 'fournisseur-list' %}">fournisseur</a>
           </li>
-          <li class="nav-item"></li>
-            <a class="nav-link" href="{% url 'product-add' %}">Créer un nouveau produit</a>
-          </li>
-          <li class="nav-item">
+          
+          <!-- <li class="nav-item">
             <a class="nav-link" href="{% url 'product-item-add' %}">Ajouter un item produit</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'product-attribute-add' %}">Ajouter un attribut produit</a>
           </li>
-        </li>
+        </li> -->
           <li class="nav-item">
             <a class="nav-link" href="{% url 'fournisseur-add' %}">Ajouter un fournisseur</a>
+          </li>
+          <li class="nav-item"></li>
+            <a class="nav-link" href="{% url 'fournisseur-add' %}">Voir le stock</a>
           </li>
           {% if user.is_authenticated %}
           <li class="nav-item">

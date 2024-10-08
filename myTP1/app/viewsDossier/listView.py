@@ -12,7 +12,7 @@ from django.core.mail import send_mail
 from django.shortcuts import redirect
 from app.forms import ContactUsForm, ProductAttributeForm, ProductForm, ProductItemForm
 from django.forms import BaseModelForm
-from ..models import Fournisseur, Product, ProductAttribute, ProductItem
+from ..models import Fournisseur, Product, ProductAttribute, ProductFournisseur, ProductItem
 
 class ProductItemListView(ListView):
     model = ProductItem
@@ -37,6 +37,11 @@ class ProductAttributeListView(ListView):
         context['titremenu'] = "attribut"
         return context
 
+
+#TP NOTEE
+
+
+
 class ProductListView(ListView):
     model = Product
     template_name = "affichage_total.html"
@@ -44,16 +49,13 @@ class ProductListView(ListView):
 
     def get_queryset(self ) :
         # return prdct.order_by("price_ttc")
-        return Product.objects.all().order_by("price_ttc")    
+        return Product.objects.all()
     
     def get_context_data(self, **kwargs):
         context = super(ProductListView, self).get_context_data(**kwargs)
         context['titremenu'] = "produits"
         return context
-
-#TP NOTEE
-
-
+    
 class FournisseurListView(ListView):
     model = Fournisseur
     template_name = "affichage_total.html"
@@ -66,4 +68,21 @@ class FournisseurListView(ListView):
         context = super(FournisseurListView, self).get_context_data(**kwargs)
         context['titremenu'] = "fournisseur"
         return context
+    
+class ProductFournisseurListView(ListView):
+    model = Product
+    template_name = "affichage_total.html"
+    context_object_name = "prdct"
+
+    def get_queryset(self ) :
+        res = ProductFournisseur.objects.all().prefetch_related('product')
+        print(res)
+        return ProductFournisseur.objects.all().prefetch_related('product')
+    
+    def get_context_data(self, **kwargs):
+        context = super(ProductFournisseurListView, self).get_context_data(**kwargs)
+        context['titremenu'] = "produits Fournisseur"
+        return context
+    
+
     
