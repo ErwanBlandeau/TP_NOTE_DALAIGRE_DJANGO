@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block contenu %}
+<form action="" method="post" >
+{% csrf_token %}
+{% if titremenu == "produits" or titremenu == "attribut"  %}
+    <p>Etes-vous sûr de vouloir supprimer le produit : {{ object.name }} ?</p>
+{% endif %}
+
+    <div>
+    {% if titremenu == "produits" %}
+    <h1> Suppression d'un produit </h1>
+    <p><strong>{{ product.name }}</strong></p>
+    <p>Code: {{ product.code }}</p>
+    <p>Prix HT: {{ product.price_ht }}</p>
+    <p>Prix TTC: {{ product.price_ttc }}</p>
+    <p>Date de création: {{ product.date_creation }}</p>
+    {% endif %}
+
+    {% if titremenu == "attribut" %}
+    <h1> Suppression d'un attribut </h1>
+
+    <p><strong>{{ product.name }}</strong></p>
+    <p>Code: {{ product.code }}</p>
+    <p>Prix HT: {{ product.price_ht }}</p>
+    <p>Prix TTC: {{ product.price_ttc }}</p>
+    <p>Date de création: {{ product.date_creation }}</p>
+    {% endif %}
+
+    {% if titremenu == "item" %}
+    <h1> Suppression d'un item </h1>
+    <p>Code: {{ productitem.code }}</p>
+    <p>Couleur: {{ productitem.color }}</p>
+    {% endif %}
+
+</div>
+
+
+
+<button type="submit" class="btn btn-outline-danger">supprimer</button>
+</form>
+
+{% endblock %}

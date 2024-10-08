@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block title %}
+Mon application DJANGO
+{% endblock %}
+{% block menu %}
+<h1>Liste des produits</h1>
+{% endblock %}
+{% block contenu %}
+
+{% if titremenu == "produits" %}
+<table class="table">
+    <thead>
+        <th>Nom</th>
+        <th>Code</th>
+        <th>Prix HT</th>
+        <th>Prix TTC</th>
+        <th>Date Création</th>
+        <th>Modifier</th>
+        <th>Supprimer</th>
+    </thead>
+    <tbody>
+        {% for p in prdct %}
+
+        <tr>
+            <!-- <td><a href="/monapp/product/{{p.id}}">{{ p.name }}</a></td> -->
+            <td><a href="{% url 'product-detail' p.id %}">{{ p.name }}</a></td>
+            <td>{{ p.code }} </td>
+            <td>{{ p.price_ht }} </td>
+            <td>{{ p.price_ttc }} </td>
+            <td>{{ p.date_creation }} </td>
+            <td><a href="{% url 'product-update' p.id %}">modifier</a></td>
+            <td><a href="{% url 'product-delete' p.id %}">supprimer</a></td>
+
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+{% endif %}
+
+{% if titremenu == "item" %}
+<table class="table">
+    <thead>
+        <th>Nom produit</th>
+        <th>Code produit</th>
+        <th>Couleur</th>
+        <th>Item code</th>
+        <th>Attributes</th>
+        <th>Modifier</th>
+        <th>Supprimer</th>
+    </thead>
+    <tbody>
+        {% for p in prdct %}
+
+        <tr>
+            <!-- <td><a href="/monapp/product/{{p.id}}">{{ p.name }}</a></td> -->
+            <td>{{ p.product.name }}</td>
+            <td>{{ p.product.code }}</td>
+            <td>{{ p.color }}</td>
+            <td>{{ p.code }} </td>
+            <td>{{ p.attributes }} </td>
+            <td><a href="{% url 'product-item-update' p.id %}">modifier</a></td>
+            <td><a href="{% url 'product-item-delete' p.id %}">supprimer</a></td>
+
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+{% endif %}
+
+{% if titremenu == "attribut" %}
+<table class="table">
+    <thead>
+    <th>Nom</th>
+    <th>Valeurs</th>
+    <th>Position</th>
+    <th>Actions</th>
+    </thead>
+    <tbody>
+    {% for attribute in prdct %}
+    <tr>
+    <td>{{ attribute.name}}</td>
+    <td>
+    {% for value in attribute.productattributevalue_set.all %}
+    <p>{{ value.value }}</p>
+    {% empty %}
+    <p>Aucune valeur</p>
+    {% endfor %}
+    </td>
+    <td>
+    {% for value in attribute.productattributevalue_set.all %}
+    <p>{{ value.position }}</p>
+    {% empty %}
+    <p>Aucune valeur</p>
+    {% endfor %}
+    </td>
+    <td>
+    <a href="{% url 'attribute-detail' attribute.id %}" class="btn btn-primary mt-2">Détails</a>
+    <td><a href="{% url 'product-attribute-update' attribute.id %}">modifier</a></td>
+            <td><a href="{% url 'product-attribute-delete' attribute.id %}">supprimer</a></td>
+    </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+
+{% endif %}
+
+<p>
+    J'ai
+    {% if prdcts|length < 5 %} peu de {% elif prdcts|length < 10 %} quelques {% else %} beaucoup de {% endif %} produits
+        préférés. </p>
+        {% endblock %}
