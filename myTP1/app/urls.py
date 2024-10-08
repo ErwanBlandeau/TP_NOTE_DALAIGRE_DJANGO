@@ -53,16 +53,22 @@ urlpatterns = [
     path("item/<pk>/delete/",views.ProductItemDeleteView.as_view(), name="product-item-delete"),
     path("attribute/<pk>/delete/",views.ProductAttributeDeleteView.as_view(), name="product-attribute-delete"),
 
-
     # ListView
     path('product', views.ProductListView.as_view(), name="product-list"),
     path('item', views.ProductItemListView.as_view(), name="item-list"),
     path('attribute', views.ProductAttributeListView.as_view(), name="attribute-list"),
-
 
     #Detail
     path("product/<pk>",views.ProductDetailView.as_view(), name="product-detail"),
     path("attribute/<pk>",views.ProductAttributeDetailView.as_view(), name="attribute-detail"),
 
 
+    #TP_NOTE
+
+
+    # ListView
+    path('fournisseur', views.FournisseurListView.as_view(), name="fournisseur-list"),
+
+    #Add
+    path("fournisseur/add/",views.ProductCreateView.as_view(), name="product-add"),
 ]
