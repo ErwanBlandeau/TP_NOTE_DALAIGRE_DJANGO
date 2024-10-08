@@ -133,7 +133,7 @@ Mon application DJANGO
             <td>{{ p.email }} </td>
             <td>{{ p.phone }} </td>
             <td>{{ p.address}}</td>
-            <td>voir le site : <a href="{{ p.website }}">ici</a></td>
+            <td>voir le site : <a href="{{ p.website }}" target="_blank">ici</a></td>
             <td><a href="{% url 'fournisseur-update' p.id %}">modifier</a></td>
             <td><a href="{% url 'fournisseur-delete' p.id %}">supprimer</a></td>            
             <td><a href="{% url 'fournisseur-delete' p.id %}">Ajouter un prosuit</a></td>

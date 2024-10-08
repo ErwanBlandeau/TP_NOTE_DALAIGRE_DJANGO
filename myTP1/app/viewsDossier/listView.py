@@ -60,9 +60,10 @@ class FournisseurListView(ListView):
     context_object_name = "prdct"
 
     def get_queryset(self ) :
-        return Fournisseur.objects.all().order_by("name")    
+        return Fournisseur.objects.all().order_by("name")
     
     def get_context_data(self, **kwargs):
         context = super(FournisseurListView, self).get_context_data(**kwargs)
         context['titremenu'] = "fournisseur"
         return context
+    

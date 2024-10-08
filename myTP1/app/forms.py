@@ -9,6 +9,12 @@ class ContactUsForm(forms.Form):
 
 
 class ProductForm(forms.ModelForm):
+    fournisseur = forms.ModelMultipleChoiceField(
+        queryset=Fournisseur.objects.all().order_by('code'),
+        widget=forms.CheckboxSelectMultiple,
+        required=True
+    )
+
     class Meta:
         model = Product
         fields = '__all__'

@@ -26,8 +26,6 @@ class Product(models.Model):
 
     class Meta:
         verbose_name = "Produit"
-        
-
 
     name          = models.CharField(max_length=100)
     code          = models.CharField(max_length=10, null=True, blank=True, unique=True)
@@ -36,12 +34,13 @@ class Product(models.Model):
     status        = models.SmallIntegerField(choices=PRODUCT_STATUS, default=0)
     date_creation = models.DateTimeField(blank=True, verbose_name="Date création") 
     nombre_de_produit = models.IntegerField(null=True, blank=True, verbose_name="Nombre de produits")
-    fournisseur  = models.ManyToManyField("Fournisseur", related_name="produits", verbose_name="Fournisseurs")
-    #fields = '__all__'
-    exclude = ('price_ttc', 'status')
+    fournisseur = models.ManyToManyField("Fournisseur", related_name="products", verbose_name="Fournisseur")
     
     def __str__(self):
         return "{0} {1}".format(self.name, self.code)
+
+
+
 
 
 # ----------------- TP NOTEE -----------------
@@ -60,13 +59,10 @@ class Fournisseur(models.Model):
     phone           = models.CharField(max_length=20, verbose_name="Numéro de téléphone", null=True, blank=True)
     address         = models.TextField(null=True, blank=True, verbose_name="Adresse")
     website         = models.URLField(max_length=200, null=True, blank=True, verbose_name="Site web")
-    produits        = models.ManyToManyField(Product, related_name="fournisseurs", verbose_name="Produits fournis")
 
     def __str__(self):
         return f"{self.name} - {self.code}"
-"""
-    Déclinaison de produit déterminée par des attributs comme la couleur, etc.
-"""
+ 
 class ProductItem(models.Model):
     
     class Meta:
