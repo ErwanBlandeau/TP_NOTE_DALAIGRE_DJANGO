@@ -62,7 +62,18 @@ class Fournisseur(models.Model):
     def __str__(self):
         return f"{self.name} - {self.code}"
     
+class ProductFournisseur(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Produit")
+    fournisseur = models.ForeignKey(Fournisseur, on_delete=models.CASCADE, verbose_name="Fournisseur")
+    prix_fournisseur = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True, verbose_name="Prix fournisseur")
+    
+    class Meta:
+        verbose_name = "Fournisseur Produit"
+        unique_together = ('product', 'fournisseur')
 
+    def __str__(self):
+        return f"{self.fournisseur.name} fournit {self.product.name} (Prix: {self.prix_fournisseur})"
+    
 class StoreInventory(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Produit")
     quantity_in_stock = models.IntegerField(default=0, verbose_name="Quantité en stock")
