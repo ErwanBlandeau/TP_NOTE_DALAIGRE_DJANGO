@@ -63,6 +63,16 @@ class Fournisseur(models.Model):
         return f"{self.name} - {self.code}"
     
 
+class StoreInventory(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Produit")
+    quantity_in_stock = models.IntegerField(default=0, verbose_name="Quantité en stock")
+    price_in_store = models.DecimalField(max_digits=8, decimal_places=2, verbose_name="Prix en magasin")
+
+    class Meta:
+        verbose_name = "Inventaire Magasin"
+        unique_together = ('product', )
+
+
 """
     Déclinaison de produit déterminée par des attributs comme la couleur, etc.
 """
