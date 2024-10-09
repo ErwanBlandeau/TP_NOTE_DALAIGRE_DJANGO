@@ -82,6 +82,9 @@ class StoreInventory(models.Model):
     class Meta:
         verbose_name = "Inventaire Magasin"
         unique_together = ('product', )
+    
+    def __str__(self):
+        return f"{self.product.name} fournit {self.product.name} (Prix: {self.price_in_store} , Quantite: {self.quantity_in_stock})"
 
 
 """
