@@ -101,10 +101,9 @@ class Product(models.Model):
     status = models.SmallIntegerField(choices=PRODUCT_STATUS, default=0, verbose_name="Statut")
     date_creation = models.DateTimeField(auto_now_add=True, verbose_name="Date de création")
     nombre_de_produit = models.IntegerField(null=True, blank=True, verbose_name="Nombre de produits")
-
     # Relation avec Fournisseur via un modèle intermédiaire ProductFournisseur
-    fournisseur = models.ManyToManyField('Fournisseur', through='ProductFournisseur', related_name='products', verbose_name="Fournisseurs")
-
+    fournisseurs = models.ManyToManyField("Fournisseur", related_name="products", through="ProductFournisseur", verbose_name="Fournisseurs")
+    
     def __str__(self):
         return f"{self.name} ({self.code})"
 
