@@ -42,6 +42,7 @@ class Product(models.Model):
     def __str__(self):
         return "{0} {1}".format(self.name, self.code)
     
+    
 
 """
 Fournisseur : nom, code, etc.
@@ -105,4 +106,28 @@ class ProductAttributeValue(models.Model):
      
     def __str__(self):
         return "{0} [{1}]".format(self.value, self.product_attribute)
+    
+class Etat(models.Model):
+    nomEtat = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nomEtat
+ 
+"""
+Fournisseur : fournisseur, produit, quantite_du_produit , etat , date_creation.
+"""
+    
+class Commande(models.Model):
+    fournisseur = models.ForeignKey(Fournisseur, on_delete=models.CASCADE)
+    produit = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantite_du_produit = models.IntegerField(null=True, blank=True)
+    etat = models.ForeignKey(Etat, on_delete=models.CASCADE)
+    date_creation = models.DateTimeField(auto_now_add=True, verbose_name="Date création")
+
+    class Meta:
+        verbose_name = "Commande"
+        unique_together = ('fournisseur', 'produit')  # Assure qu'une commande pour le même fournisseur et produit est unique
+
+    def __str__(self):
+        return f"Commande de {self.produit} par {self.fournisseur} le {self.date_creation}"
     
