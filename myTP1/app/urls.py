@@ -71,4 +71,10 @@ urlpatterns = [
 
     #Add
     path("fournisseur/add/",views.FournisseurCreateView.as_view(), name="fournisseur-add"),
+
+     #Update
+    path("fournisseur/<pk>/update/",views.FournisseurUpdateView.as_view(), name="fournisseur-update"),
+
+    #Delete
+    path("fournisseur/<pk>/delete/",views.FournisseurDeleteView.as_view(), name="fournisseur-delete"),
 ]

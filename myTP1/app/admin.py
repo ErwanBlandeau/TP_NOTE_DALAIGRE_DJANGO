@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, ProductAttribute, ProductAttributeValue, ProductItem
+from .models import Fournisseur, Product, ProductAttribute, ProductAttributeValue, ProductFournisseur, ProductItem, StoreInventory
 
 
 class ProductItemAdmin(admin.TabularInline):
@@ -47,6 +47,9 @@ admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductItem)
 admin.site.register(ProductAttribute)
 admin.site.register(ProductAttributeValue)
+admin.site.register(Fournisseur)
+admin.site.register(ProductFournisseur)
+admin.site.register(StoreInventory)
 
 
 # Register your models here.
