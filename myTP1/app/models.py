@@ -62,6 +62,11 @@ class Fournisseur(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.code}"
+    
+    
+    
+    
+    
 """
     Déclinaison de produit déterminée par des attributs comme la couleur, etc.
 """

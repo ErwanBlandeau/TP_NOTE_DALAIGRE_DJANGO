@@ -39,6 +39,34 @@ Mon application DJANGO
     </tbody>
 </table>
 {% endif %}
+{% if titremenu == "commande" %}
+<table class="table">
+    <thead>
+        <th>Fournisseur</th>
+        <th>Produit</th>
+        <th>Quantite</th>
+        <th>Etat</th>
+        <th>Date création</th>
+    </thead>
+    <tbody>
+        {% for p in prdct %}
+
+        <tr>
+            <!-- <td><a href="/monapp/product/{{p.id}}">{{ p.name }}</a></td> -->
+            <td><a href="{% url 'fournisseur-detail' p.fournisseur.id %}">{{ p.fournisseur.name}}</a></td>
+            <td><a href="{% url 'product-detail' p.produit.id %}">{{ p.produit.name }}</a></td>
+            <td>{{ p.quantite_du_produit}}</td>
+            <td>{{ p.etat }} </td>
+            <td>{{ p.date_creation }} </td>
+            <td><a href="{% url 'commande-update' p.id %}">modifier</a></td>
+            <td><a href="{% url 'commande-delete' p.id %}">supprimer</a></td>
+
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+{% endif %}
 
 {% if titremenu == "item" %}
 <table class="table">
