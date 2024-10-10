@@ -3,9 +3,9 @@ from django.views.generic import *
 
 from django.shortcuts import redirect, render
 
-from app.forms import FournisseurForm, ProductAttributeForm, ProductForm, ProductItemForm  ,CommandeForm
+from app.forms import FournisseurForm, ProductAttributeForm, ProductForm, ProductFournisseurForm, ProductItemForm  ,CommandeForm
 from django.forms import BaseModelForm
-from ..models import Fournisseur, Product, ProductAttribute, ProductItem  ,Commande
+from ..models import Fournisseur, Product, ProductAttribute, ProductFournisseur, ProductItem  ,Commande
 
 
 
@@ -81,3 +81,22 @@ class CommandeCreateView(CreateView):
         return redirect('commande-list')
     
     
+
+class ProductFournisseurCreateView(CreateView):
+    model = ProductFournisseur
+    form_class = ProductFournisseurForm
+    template_name = "new_product.html"
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        product = form.save()
+        return redirect('product-detail', product.id)
+    
+def ProductFournisseurCreate(request):
+    form = ProductFournisseurForm()
+    if request.method == 'POST':
+        form = ProductFournisseurForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('each-fournisseur-product-list')
+    else:
+        form = ProductFournisseurForm()
+    return render(request, "new_product.html", {'form': form})
