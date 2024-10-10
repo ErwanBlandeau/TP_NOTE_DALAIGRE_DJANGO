@@ -2,9 +2,11 @@ from django.http import HttpResponse
 from django.views.generic import * 
 
 from django.shortcuts import redirect, render
-from app.forms import FournisseurForm, ProductAttributeForm, ProductForm, ProductItemForm
+
+from app.forms import FournisseurForm, ProductAttributeForm, ProductForm, ProductItemForm  ,CommandeForm
 from django.forms import BaseModelForm
-from ..models import Fournisseur, Product, ProductAttribute, ProductItem
+from ..models import Fournisseur, Product, ProductAttribute, ProductItem  ,Commande
+
 
 
 class ProductCreateView(CreateView):
@@ -68,5 +70,14 @@ class ProductItemCreateView(CreateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         form.save()
         return redirect('item-list')
+    
+    
+class CommandeCreateView(CreateView):
+    model = Commande
+    form_class = CommandeForm
+    template_name = "new_commande.html"
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        form.save()
+        return redirect('commande-list')
     
     

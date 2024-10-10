@@ -62,6 +62,7 @@ class Fournisseur(models.Model):
     def __str__(self):
         return f"{self.name} - {self.code}"
     
+
 class ProductFournisseur(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Produit")
     fournisseur = models.ForeignKey(Fournisseur, on_delete=models.CASCADE, verbose_name="Fournisseur")
@@ -85,7 +86,6 @@ class StoreInventory(models.Model):
     
     def __str__(self):
         return f"{self.product.name} fournit {self.product.name} (Prix: {self.price_in_store} , Quantite: {self.quantity_in_stock})"
-
 
 """
     Déclinaison de produit déterminée par des attributs comme la couleur, etc.
