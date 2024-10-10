@@ -58,15 +58,35 @@ class Fournisseur(models.Model):
     phone           = models.CharField(max_length=20, verbose_name="Numéro de téléphone", null=True, blank=True)
     address         = models.TextField(null=True, blank=True, verbose_name="Adresse")
     website         = models.URLField(max_length=200, null=True, blank=True, verbose_name="Site web")
-    produits        = models.ManyToManyField(Product, related_name="fournisseurs", verbose_name="Produits fournis")
 
     def __str__(self):
         return f"{self.name} - {self.code}"
     
+
+class ProductFournisseur(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Produit")
+    fournisseur = models.ForeignKey(Fournisseur, on_delete=models.CASCADE, verbose_name="Fournisseur")
+    prix_fournisseur = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True, verbose_name="Prix fournisseur")
     
+    class Meta:
+        verbose_name = "Fournisseur Produit"
+        unique_together = ('product', 'fournisseur')
+
+    def __str__(self):
+        return f"{self.fournisseur.name} fournit {self.product.name} (Prix: {self.prix_fournisseur})"
     
+class StoreInventory(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Produit")
+    quantity_in_stock = models.IntegerField(default=0, verbose_name="Quantité en stock")
+    price_in_store = models.DecimalField(max_digits=8, decimal_places=2, verbose_name="Prix en magasin")
+
+    class Meta:
+        verbose_name = "Inventaire Magasin"
+        unique_together = ('product', )
     
-    
+    def __str__(self):
+        return f"{self.product.name} fournit {self.product.name} (Prix: {self.price_in_store} , Quantite: {self.quantity_in_stock})"
+
 """
     Déclinaison de produit déterminée par des attributs comme la couleur, etc.
 """

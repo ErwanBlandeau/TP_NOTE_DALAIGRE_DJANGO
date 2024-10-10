@@ -2,9 +2,11 @@ from django.http import HttpResponse
 from django.views.generic import * 
 
 from django.shortcuts import redirect, render
-from app.forms import ProductAttributeForm, ProductForm, ProductItemForm ,CommandeForm
+
+from app.forms import FournisseurForm, ProductAttributeForm, ProductForm, ProductItemForm  ,CommandeForm
 from django.forms import BaseModelForm
-from ..models import Product, ProductAttribute, ProductItem ,Commande
+from ..models import Fournisseur, Product, ProductAttribute, ProductItem  ,Commande
+
 
 
 class ProductCreateView(CreateView):
@@ -15,7 +17,7 @@ class ProductCreateView(CreateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         product = form.save()
         return redirect('product-detail', product.id)
-    
+
 
 
 def ProductCreate(request):
@@ -29,6 +31,26 @@ def ProductCreate(request):
         form = ProductForm()
     return render(request, "new_product.html", {'form': form})
 
+class FournisseurCreateView(CreateView):
+    model = Fournisseur
+    form_class = FournisseurForm
+    template_name = "new_product.html"
+    
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        product = form.save()
+        return redirect('product-detail', product.id)
+    
+def FournisseurCreate(request):
+    form = FournisseurForm()
+    if request.method == 'POST':
+        form = FournisseurForm(request.POST)
+        if form.is_valid():
+            product = form.save()
+            return redirect('fournisseur-list')
+    else:
+        form = FournisseurForm()
+    return render(request, "new_product.html", {'form': form})
+    
 
 class ProductAttributeCreateView(CreateView):
     model = ProductAttribute
