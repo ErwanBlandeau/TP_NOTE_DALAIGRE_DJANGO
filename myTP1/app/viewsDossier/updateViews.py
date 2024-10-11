@@ -6,9 +6,9 @@ from django.contrib.auth.models import User
 from django import forms
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
-from app.forms import ContactUsForm, FournisseurForm, ProductAttributeForm, ProductForm, ProductFournisseurForm, ProductItemForm
+from app.forms import ContactUsForm, FournisseurForm, ProductAttributeForm, ProductForm, ProductFournisseurForm, ProductItemForm , StoreInventoryForm
 from django.forms import BaseModelForm
-from ..models import Fournisseur, Product, ProductAttribute, ProductFournisseur, ProductItem
+from ..models import Fournisseur, Product, ProductAttribute, ProductFournisseur, ProductItem, StoreInventory
 
 class ProductUpdateView(UpdateView):
     model = Product
@@ -128,4 +128,28 @@ def ProductFournisseurUpdate(request, id):
             return redirect('fournisseur-list')
     else:
         form = ProductFournisseurForm(instance=fournisseur)
+    return render(request,'product-update.html', {'form': form})
+
+
+
+
+class StoreInventoryUpdateView(UpdateView):
+    model = ProductFournisseur
+    form_class = ProductFournisseurForm
+    template_name = "update_total.html"
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        prdct = form.save()
+        return redirect('each-market-inventory-list')    
+    
+def StoreInventoryUpdate(request, id):
+    fournisseur = StoreInventory.objects.get(id=id)
+    if request.method == 'POST':
+        form = StoreInventoryForm(request.POST, instance=fournisseur)
+        if form.is_valid():
+            # mettre à jour le produit existant dans la base de données
+            form.save()
+            # rediriger vers la page détaillée du produit que nous venons de mettre à jour
+            return redirect('each-market-inventory-list')
+    else:
+        form = StoreInventoryForm(instance=fournisseur)
     return render(request,'product-update.html', {'form': form})

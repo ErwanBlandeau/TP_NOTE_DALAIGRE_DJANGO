@@ -3,9 +3,9 @@ from django.views.generic import *
 
 from django.shortcuts import redirect, render
 
-from app.forms import FournisseurForm, ProductAttributeForm, ProductForm, ProductFournisseurForm, ProductItemForm  ,CommandeForm
+from app.forms import FournisseurForm, ProductAttributeForm, ProductForm, ProductFournisseurForm, ProductItemForm  ,CommandeForm, StoreInventoryForm
 from django.forms import BaseModelForm
-from ..models import Fournisseur, Product, ProductAttribute, ProductFournisseur, ProductItem  ,Commande
+from ..models import Fournisseur, Product, ProductAttribute, ProductFournisseur, ProductItem  ,Commande, StoreInventory
 
 
 
@@ -99,4 +99,26 @@ def ProductFournisseurCreate(request):
             return redirect('each-fournisseur-product-list')
     else:
         form = ProductFournisseurForm()
+    return render(request, "new_product.html", {'form': form})
+
+
+
+
+class StoreInventoryCreateView(CreateView):
+    model = StoreInventory
+    form_class = StoreInventoryForm
+    template_name = "new_product.html"
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        product = form.save()
+        return redirect('each-market-inventory-list')
+    
+def StoreInventoryCreate(request):
+    form = StoreInventoryForm()
+    if request.method == 'POST':
+        form = StoreInventoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('each-market-inventory-list')
+    else:
+        form = StoreInventoryForm()
     return render(request, "new_product.html", {'form': form})
