@@ -110,13 +110,12 @@ def FournisseurUpdate(request, id):
 
 
 class ProductFournisseurUpdateView(UpdateView):
-    model = Fournisseur
-    form_class = FournisseurForm
+    model = ProductFournisseur
+    form_class = ProductFournisseurForm
     template_name = "update_total.html"
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        form.save()
-        return redirect('fournisseur-list')
-    
+        prdct = form.save()
+        return redirect('each-fournisseur-product-list', prdct.fournisseur.id)    
     
 def ProductFournisseurUpdate(request, id):
     fournisseur = ProductFournisseur.objects.get(id=id)
