@@ -96,13 +96,7 @@ class ProductFournisseurListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ProductFournisseurListView, self).get_context_data(**kwargs)
         context['titremenu'] = "product_fournisseur"
-        
-        # Si des produits existent, récupère le fournisseur du premier produit
         fournisseur = Fournisseur.objects.get(id=self.kwargs.get('fournisseur_id'))
         context['fournisseur_id'] = fournisseur.id
-
-        print(context['fournisseur_id'])
-        print(context['fournisseur_id'])
-   
 
         return context
