@@ -13,7 +13,7 @@ from django.shortcuts import redirect
 from app.forms import ContactUsForm, ProductAttributeForm, ProductForm, ProductItemForm
 from django.forms import BaseModelForm
 
-from ..models import Fournisseur, Product, ProductAttribute, ProductItem , Commande
+from ..models import Fournisseur, Product, ProductAttribute, ProductItem , Commande, ProductFournisseur
 
 
 class ProductItemListView(ListView):
@@ -82,4 +82,21 @@ class FournisseurListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(FournisseurListView, self).get_context_data(**kwargs)
         context['titremenu'] = "fournisseur"
+        return context
+    
+
+class ProductFournisseurListView(ListView):
+    model = ProductFournisseur
+    template_name = "affichage_total.html"
+    context_object_name = "prdct"
+
+    def get_queryset(self):
+        return ProductFournisseur.objects.all().filter(fournisseur_id=self.kwargs.get('fournisseur_id')).select_related('product')
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductFournisseurListView, self).get_context_data(**kwargs)
+        context['titremenu'] = "product_fournisseur"
+        fournisseur = Fournisseur.objects.get(id=self.kwargs.get('fournisseur_id'))
+        context['fournisseur_id'] = fournisseur.id
+
         return context

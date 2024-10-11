@@ -1,6 +1,6 @@
 from django.views.generic import * 
 from django.shortcuts import redirect
-from ..models import Fournisseur, Product, ProductAttribute, ProductItem
+from ..models import Fournisseur, Product, ProductAttribute, ProductFournisseur, ProductItem
 
 
 
@@ -56,4 +56,19 @@ class FournisseurDeleteView(DeleteView):
     def post(self, request, **kwargs):
         product = self.get_object()
         product.delete()
+        return redirect('fournisseur-list')
+    
+
+class ProductFournisseurDeleteView(DeleteView):
+    model = ProductFournisseur
+    template_name = "delete_total.html"
+    def get_context_data(self, **kwargs):
+        context = super(ProductFournisseurDeleteView, self).get_context_data(**kwargs)
+        context['titremenu'] = "product_fournisseur"
+        return context
+    def post(self, request, **kwargs):
+        product = self.get_object()
+        print(product)
+        print(product)
+        # product.delete()
         return redirect('fournisseur-list')
