@@ -1,4 +1,11 @@
 {% extends 'base.html' %}
+
+{% load static %}
+{% block styles %}
+  {{ block.super }} 
+  <!-- <link rel="stylesheet" href="{% static 'css/affichageTotal.css' %}" /> -->
+{% endblock %}
+
 {% block title %}
 Mon application DJANGO
 {% endblock %}

@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
+
+{% load static %}
+{% block styles %}
+<!-- <link rel="stylesheet" href="{% static 'css/affichageTotal.css' %}" /> -->
+{% endblock %}
+
 {% block contenu %}
 <h1>Créer une Commande pour {{ form.initial.produit.name }}</h1>
 <form id="commande-form" method="post">

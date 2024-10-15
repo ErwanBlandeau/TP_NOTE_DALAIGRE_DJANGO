@@ -18,10 +18,14 @@ class ProductUpdateView(UpdateView):
         product = form.save()
         return redirect('product-detail', product.id)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titremenu'] = "modifier un produit" 
+        return context
+
 
 def ProductUpdate(request, id):
     prdct = Product.objects.get(id=id)
-    print(prdct)
     if request.method == 'POST':
         form = ProductForm(request.POST, instance=prdct)
         if form.is_valid():
@@ -69,6 +73,12 @@ class ProductItemUpdateView(UpdateView):
         return redirect('item-list')
 
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titremenu'] = "modifier un item produit" 
+        return context
+
+    
 
 def ProductItemUpdate(request, id):
     prdct = ProductItem.objects.get(id=id)
@@ -92,6 +102,11 @@ class FournisseurUpdateView(UpdateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         form.save()
         return redirect('fournisseur-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titremenu'] = "modifier un fournisseur" 
+        return context
     
     
 def FournisseurUpdate(request, id):
@@ -116,6 +131,11 @@ class ProductFournisseurUpdateView(UpdateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         prdct = form.save()
         return redirect('each-fournisseur-product-list', prdct.fournisseur.id)    
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titremenu'] = "modifier un produit du fournisseur" 
+        return context
     
 def ProductFournisseurUpdate(request, id):
     fournisseur = ProductFournisseur.objects.get(id=id)
@@ -140,6 +160,11 @@ class StoreInventoryUpdateView(UpdateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         prdct = form.save()
         return redirect('each-market-inventory-list')    
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titremenu'] = "Modifier un produit de l'inventaire" 
+        return context
     
 def StoreInventoryUpdate(request, id):
     fournisseur = StoreInventory.objects.get(id=id)
