@@ -1,6 +1,7 @@
 from django.http import HttpResponse , JsonResponse
 from django.views.generic import * 
-JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 from django.shortcuts import redirect, render
 
@@ -82,7 +83,8 @@ class ProductItemCreateView(CreateView):
         form.save()
         return redirect('item-list')
     
-    
+
+@method_decorator(login_required, name="dispatch")
 class CommandeCreateView(CreateView):
     model = Commande
     form_class = CommandeForm
@@ -110,7 +112,7 @@ class CommandeCreateView(CreateView):
 
     
     
-    
+
 class EtatCreateView(CreateView):
     model = Etat
     form_class = EtatForm

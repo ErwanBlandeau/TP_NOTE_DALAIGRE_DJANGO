@@ -38,8 +38,14 @@ Mon application DJANGO
             <td>{{ p.price_ttc }} </td>
             <td>{{ p.nombre_de_produit}}</td>
             <td>{{ p.date_creation }} </td>
-            <td><a href="{% url 'product-update' p.id %}">modifier</a></td>
-            <td><a href="{% url 'product-delete' p.id %}">supprimer</a></td>
+            <td><a href="{% url 'product-update' p.id %}"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/>
+              </svg>
+              </a></td>
+            <td><a href="{% url 'product-delete' p.id %}"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+              </svg>
+              </a></td>
 
         </tr>
         {% endfor %}
@@ -55,6 +61,8 @@ Mon application DJANGO
         <th>Quantite</th>
         <th>Etat</th>
         <th>Date création</th>
+        <th>Modifier</th>
+        <th>Supprimer</th>
     </thead>
     <tbody>
         {% for p in prdct %}
@@ -66,8 +74,14 @@ Mon application DJANGO
             <td>{{ p.quantite_du_produit}}</td>
             <td>{{ p.etat }} </td>
             <td>{{ p.date_creation }} </td>
-            <td><a href="{% url 'commande-update' p.id %}">modifier</a></td>
-            <td><a href="{% url 'commande-delete' p.id %}">supprimer</a></td>
+            <td><a href="{% url 'commande-update' p.id %}"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/>
+              </svg>
+              </a></td>
+            <td><a href="{% url 'commande-delete' p.id %}"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+              </svg>
+              </a></td>
 
         </tr>
         {% endfor %}
@@ -97,8 +111,14 @@ Mon application DJANGO
             <td>{{ p.color }}</td>
             <td>{{ p.code }} </td>
             <td>{{ p.attributes }} </td>
-            <td><a href="{% url 'product-item-update' p.id %}">modifier</a></td>
-            <td><a href="{% url 'product-item-delete' p.id %}">supprimer</a></td>
+            <td><a href="{% url 'product-item-update' p.id %}"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/>
+              </svg>
+              </a></td>
+            <td><a href="{% url 'product-item-delete' p.id %}"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+              </svg>
+              </a></td>
 
         </tr>
         {% endfor %}
@@ -135,8 +155,14 @@ Mon application DJANGO
     </td>
     <td>
     <a href="{% url 'attribute-detail' attribute.id %}" class="btn btn-primary mt-2">Détails</a>
-    <td><a href="{% url 'product-attribute-update' attribute.id %}">modifier</a></td>
-            <td><a href="{% url 'product-attribute-delete' attribute.id %}">supprimer</a></td>
+    <td><a href="{% url 'product-attribute-update' attribute.id %}"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/>
+      </svg>
+      </a></td>
+            <td><a href="{% url 'product-attribute-delete' attribute.id %}"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+              </svg>
+              </a></td>
     </td>
     </tr>
     {% endfor %}
@@ -170,8 +196,14 @@ Mon application DJANGO
             <td>{{ p.phone }} </td>
             <td>{{ p.address}}</td>
             <td>voir le site : <a href="{{ p.website }}" target="_blank">ici</a></td>
-            <td><a href="{% url 'fournisseur-update' p.id %}">modifier</a></td>
-            <td><a href="{% url 'fournisseur-delete' p.id %}">supprimer</a></td>            
+            <td><a href="{% url 'fournisseur-update' p.id %}"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/>
+              </svg>
+              </a></td>
+            <td><a href="{% url 'fournisseur-delete' p.id %}"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+              </svg>
+              </a></td>            
             <td>
                 <a href="{% url 'each-fournisseur-product-list' p.id %}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16">
@@ -206,8 +238,14 @@ Mon application DJANGO
             <td>{{ p.product.name }}</td>
             <td>{{ p.prix_fournisseur }} </td>
        
-            <td><a href="{% url 'each-fournisseur-product-update' p.id %}">modifier</a></td>
-            <td><a href="{% url 'each-fournisseur-product-delete' p.id %}">supprimer</a></td>            
+            <td><a href="{% url 'each-fournisseur-product-update' p.id %}"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/>
+              </svg>
+              </a></td>
+            <td><a href="{% url 'each-fournisseur-product-delete' p.id %}"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+              </svg>
+              </a></td>            
         </tr>
         {% endfor %}
 
@@ -240,8 +278,14 @@ Mon application DJANGO
             <td>{{ p.price_in_store }} </td>    
             <td>{{ p.quantity_in_stock }} </td>
        
-            <td><a href="{% url 'each-market-inventory-update' p.id %}">modifier</a></td>
-            <td><a href="{% url 'each-market-inventory-delete' p.id %}">supprimer</a></td>            
+            <td><a href="{% url 'each-market-inventory-update' p.id %}"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/>
+              </svg>
+              </a></td>
+            <td><a href="{% url 'each-market-inventory-delete' p.id %}"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+              </svg>
+              </a></td>            
         </tr>
         {% endfor %}
 
