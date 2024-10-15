@@ -26,8 +26,6 @@ class Product(models.Model):
 
     class Meta:
         verbose_name = "Produit"
-        
-
 
     name          = models.CharField(max_length=100)
     code          = models.CharField(max_length=10, null=True, blank=True, unique=True)
@@ -117,6 +115,9 @@ class ProductAttribute(models.Model):
     def __str__(self):
         return self.name
     
+
+
+
 class ProductAttributeValue(models.Model):
     """
     Valeurs des attributs
@@ -128,7 +129,7 @@ class ProductAttributeValue(models.Model):
         
     value              = models.CharField(max_length=100)
     product_attribute  = models.ForeignKey('ProductAttribute', verbose_name="Unité", on_delete=models.CASCADE)
-    position           = models.PositiveSmallIntegerField("Position", null=True, blank=True)
+    position           = models.IntegerField("Position", null=True, blank=True)
      
     def __str__(self):
         return "{0} [{1}]".format(self.value, self.product_attribute)

@@ -1,0 +1,14 @@
+[run]
+source = app
+omit = 
+    */migrations/*
+    */settings/*
+    */wsgi.py/*
+    */asgi.py/*
+    *__init__.py/*
+
+[report]
+show_missing = true
+
+[html]
+directory = htmlcov

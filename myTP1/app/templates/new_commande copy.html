@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block contenu %}
+<h1>Créer une Commande pour {{ form.initial.produit.name }}</h1>
+<form id="commande-form" method="post">
+    {% csrf_token %}
+    
+    {{ form.produit }}
+    
+    <label for="id_fournisseur">Fournisseur:</label>
+    <select name="fournisseur" id="id_fournisseur">
+       
+    </select>
+    
+    {{ form.quantite_du_produit }}  <!-- Vérifiez que ce champ est correctement orthographié -->
+    {{ form.etat }}
+
+    <input type="hidden" name="produit_id" id="produit_id" value="{{ form.initial.produit.id }}">
+    <button type="submit" id="bouton" class="btn btn-success">Créer</button>
+</form>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#id_produit').change(function() {  // Assurez-vous que l'ID correspond au champ select de produit
+            var produitId = $(this).val();  // Récupérer l'ID du produit sélectionné
+
+            $.ajax({
+                url: "{% url 'commande-create'%}",  // Remplacez par l'URL correcte
+                type: "GET",
+                data: {
+                    'produit_id': produitId,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function(response) {
+                    console.log(response);
+                    // Parcourir la réponse pour ajouter chaque fournisseur
+                    var select_fournisseur = document.getElementById("id_fournisseur");
+                    select_fournisseur.innerHTML = '';
+                
+                    // Parcourir la réponse pour ajouter chaque fournisseur
+                    response.forEach(function(fournisseur) {
+                        let option = document.createElement("option");
+                        option.value = fournisseur["id"];
+                        option.text = fournisseur["name"];
+                        select_fournisseur.appendChild(option);
+                    });
+
+                },
+                error: function(xhr, status, error) {
+                    console.error("Erreur lors de l'envoi de l'ID:", error);
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
