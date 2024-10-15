@@ -1,4 +1,3 @@
-
 {% load static %}
 
 <!doctype html>
@@ -8,105 +7,45 @@
   <meta charset="utf -8">
   <title>{% block title %}{% endblock %}</title>
   {% block styles %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-  <link rel="stylesheet" href="{% static 'node_modules/bootstrap/dist/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+
   {% endblock %}
 </head>
 
 <body>
   {% block nav %}
-  <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
+  <nav class="navbar">
     <div class="container">
-      <!-- Navbar Brand (Logo or Title) -->
-      <a class="navbar-brand pe-none disable" href="#">Mon Site DJANGO</a>
-      
-      <!-- Toggle Button for Mobile View -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <!-- Branding for the site -->
+      <a class="navbar-brand" href="#">Mon Site DJANGO</a>
+
+      <!-- Button for mobile view toggle -->
+      <button class="navbar-toggler" id="navbar-toggle">
         <span class="navbar-toggler-icon"></span>
       </button>
-      
-      <!-- Navbar Links -->
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link user-select-none pe-auto" onclick="message()">Home</a>
-          </li> 
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'about' %}">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'product-list' %}">Produits</a>
-          </li>
-          <li class="nav-item"></li>
-            <a class="nav-link" href="{% url 'item-list' %}"> Item</a>
-          </li>
-          <li class="nav-item"></li>
-            <a class="nav-link" href="{% url 'attribute-list' %}">attributs</a>
-          </li>
-          <li class="nav-item"></li>
-            <a class="nav-link" href="{% url 'fournisseur-list' %}">fournisseur</a>
-          </li>
-          <li class="nav-item"></li>
-            <a class="nav-link" href="{% url 'product-add' %}">Créer un nouveau produit</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'product-item-add' %}">Ajouter un item produit</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'product-attribute-add' %}">Ajouter un attribut produit</a>
+
+      <!-- Navigation links -->
+      <div class="navbar-menu" id="navbar-menu">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="{% url 'product-list' %}">Produits</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'fournisseur-list' %}">Fournisseur</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'product-add' %}">Créer un produit</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'commande-list' %}">Listing Commande</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'each-market-inventory-list' %}">Voir l'inventaire</a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'commande-list' %}">listing commande</a>
-
-        </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'fournisseur-add' %}">Ajouter un fournisseur</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'each-market-inventory-list' %}">Voir l'inventaire</a>
-          </li>
-
-          
+          <!-- Conditional rendering for authentication -->
           {% if user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}">Déconnexion</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Déconnexion</a></li>
           {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'login' %}">Connexion</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'register' %}">Inscription</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Connexion</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Inscription</a></li>
           {% endif %}
         </ul>
       </div>
     </div>
-  </nav>  
-  <script>
-    function message() {
-      var promptAnswer = prompt("Voulez-vous un paramètre dans l'URL ? (oui ou non)");
+  </nav>
 
-      if (promptAnswer.toLowerCase() === "oui") {
-        var param = prompt("Entrez une valeur pour 'val':");
-        if (param) {
-          // Rediriger avec un paramètre
-          window.location.href = "{% url 'home' 'dummy_param' %}".replace('dummy_param', param);
-        } else {
-          alert("Aucune valeur entrée pour 'val'. Redirection vers l'accueil sans paramètre.");
-          window.location.href = "{% url 'home_no_param' %}";
-        }
-      } else {
-        // Rediriger sans paramètre
-        window.location.href = "{% url 'home_no_param' %}";
-      }
-    }
-  </script>
   {% endblock %}
   <main role="main" class="container top-pushed">
     <div class="jumbotron">
