@@ -1,11 +1,6 @@
 
 from .models import ProductAttributeValue
-from .viewsDossier.createViews import *
-from .viewsDossier.deleteViews import *
-from .viewsDossier.updateViews import *
-from .viewsDossier.connexionView import *
-from .viewsDossier.pageSimple import *
-from .viewsDossier.listView import *
+from app.viewsDossier import *
 
 
 class ProductDetailView(DetailView):

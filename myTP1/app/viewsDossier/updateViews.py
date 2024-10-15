@@ -9,6 +9,9 @@ from django.shortcuts import redirect, render
 from app.forms import ContactUsForm, FournisseurForm, ProductAttributeForm, ProductForm, ProductFournisseurForm, ProductItemForm , StoreInventoryForm , CommandeForm
 from django.forms import BaseModelForm
 from ..models import Fournisseur, Product, ProductAttribute, ProductFournisseur, ProductItem, StoreInventory , Commande
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 
 class ProductUpdateView(UpdateView):
     model = Product
@@ -179,7 +182,7 @@ def StoreInventoryUpdate(request, id):
         form = StoreInventoryForm(instance=fournisseur)
     return render(request,'product-update.html', {'form': form})
 
-
+@method_decorator(login_required, name="dispatch")
 class CommandeUpdateView(UpdateView):
     model = Commande
     form_class = CommandeForm

@@ -1,7 +1,8 @@
 from django.views.generic import * 
 from django.shortcuts import redirect
 from ..models import Fournisseur, Product, ProductAttribute, ProductFournisseur, ProductItem, StoreInventory , Commande
-
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 
 class ProductDeleteView(DeleteView):
@@ -85,6 +86,7 @@ class StoreInventoryDeleteView(DeleteView):
         product.delete()
         return redirect('each-market-inventory-list')
     
+@method_decorator(login_required, name="dispatch")
 class CommandeDeleteView(DeleteView):
     model = Commande
     template_name = "delete_total.html"

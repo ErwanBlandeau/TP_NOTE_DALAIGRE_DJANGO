@@ -129,6 +129,10 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+LOGIN_URL = '/monapp/login/'
+LOGIN_REDIRECT_URL = '/home/'  # Changez cela selon où vous voulez rediriger après la connexion
+
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / "media/"
 
