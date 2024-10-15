@@ -6,9 +6,9 @@ from django.contrib.auth.models import User
 from django import forms
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
-from app.forms import ContactUsForm, FournisseurForm, ProductAttributeForm, ProductForm, ProductFournisseurForm, ProductItemForm , StoreInventoryForm
+from app.forms import ContactUsForm, FournisseurForm, ProductAttributeForm, ProductForm, ProductFournisseurForm, ProductItemForm , StoreInventoryForm , CommandeForm
 from django.forms import BaseModelForm
-from ..models import Fournisseur, Product, ProductAttribute, ProductFournisseur, ProductItem, StoreInventory
+from ..models import Fournisseur, Product, ProductAttribute, ProductFournisseur, ProductItem, StoreInventory , Commande
 
 class ProductUpdateView(UpdateView):
     model = Product
@@ -177,4 +177,27 @@ def StoreInventoryUpdate(request, id):
             return redirect('each-market-inventory-list')
     else:
         form = StoreInventoryForm(instance=fournisseur)
+    return render(request,'product-update.html', {'form': form})
+
+
+class CommandeUpdateView(UpdateView):
+    model = Commande
+    form_class = CommandeForm
+    template_name = "update_total.html"
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        form.save()
+        return redirect('commande-list')
+    
+    
+def CommandeUpdate(request, id):
+    commande = Commande.objects.get(id=id)
+    if request.method == 'POST':
+        form = FournisseurForm(request.POST, instance=commande)
+        if form.is_valid():
+            # mettre à jour le produit existant dans la base de données
+            form.save()
+            # rediriger vers la page détaillée du produit que nous venons de mettre à jour
+            return redirect('commande-list')
+    else:
+        form = CommandeForm(instance=commande)
     return render(request,'product-update.html', {'form': form})

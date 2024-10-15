@@ -61,7 +61,7 @@ Mon application DJANGO
 
         <tr>
             <!-- <td><a href="/monapp/product/{{p.id}}">{{ p.name }}</a></td> -->
-            <td><a href="{% url 'fournisseur-detail' p.fournisseur.id %}">{{ p.fournisseur.name}}</a></td>
+            <td>{{ p.fournisseur.name}}</td>
             <td><a href="{% url 'product-detail' p.produit.id %}">{{ p.produit.name }}</a></td>
             <td>{{ p.quantite_du_produit}}</td>
             <td>{{ p.etat }} </td>

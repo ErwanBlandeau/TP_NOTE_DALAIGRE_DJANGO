@@ -115,3 +115,17 @@ class StoreInventoryListView(ListView):
         context['titremenu'] = "store_inventory"
         return context
     
+    
+class CommandeListView(ListView):
+    model = Commande
+    template_name = "affichage_total.html"
+    context_object_name = "prdct"
+
+    def get_queryset(self ) :
+        # return prdct.order_by("price_ttc")
+        return Commande.objects.all()
+    
+    def get_context_data(self, **kwargs):
+        context = super(CommandeListView, self).get_context_data(**kwargs)
+        context['titremenu'] = "commande"
+        return context

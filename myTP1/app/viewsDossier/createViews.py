@@ -1,11 +1,12 @@
-from django.http import HttpResponse
+from django.http import HttpResponse , JsonResponse
 from django.views.generic import * 
+JsonResponse
 
 from django.shortcuts import redirect, render
 
-from app.forms import FournisseurForm, ProductAttributeForm, ProductForm, ProductFournisseurForm, ProductItemForm  ,CommandeForm, StoreInventoryForm
+from app.forms import FournisseurForm, ProductAttributeForm, ProductForm, ProductFournisseurForm, ProductItemForm  ,CommandeForm, StoreInventoryForm ,EtatForm
 from django.forms import BaseModelForm
-from ..models import Fournisseur, Product, ProductAttribute, ProductFournisseur, ProductItem  ,Commande, StoreInventory
+from ..models import Fournisseur, Product, ProductAttribute, ProductFournisseur, ProductItem  ,Commande, StoreInventory ,Etat
 
 
 
@@ -86,9 +87,49 @@ class CommandeCreateView(CreateView):
     model = Commande
     form_class = CommandeForm
     template_name = "new_commande.html"
+    
+    def get(self, request):
+        produit_id = request.GET.get('produit_id')
+        if(produit_id != None):
+            fournisseur_ids = ProductFournisseur.objects.filter(product_id=produit_id).values_list('fournisseur', flat=True)
+            fournisseurs = Fournisseur.objects.filter(id__in=fournisseur_ids)
+            fournisseur_list = []
+            for fourni in fournisseurs:
+                fournisseur_list.append({'id':fourni.id,"name":fourni.name})
+            return JsonResponse(fournisseur_list, safe=False)
+        else:
+            form = CommandeForm()
+            return render(request, "new_commande.html", {'form': form})
+
+    def form_valid(self, form):
+        print(form)
+        form.save()  # Sauvegarder la commande
+        return redirect('commande-list') 
+
+
+
+    
+    
+    
+class EtatCreateView(CreateView):
+    model = Etat
+    form_class = EtatForm
+    template_name = "new_etat.html"
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         form.save()
         return redirect('commande-list')
+    
+    
+    def EtatCreate(request):
+        form = EtatForm()
+        if request.method == 'POST':
+            form = EtatForm(request.POST)
+            if form.is_valid():
+                etat = form.save()
+                return redirect('commande-list')
+        else:
+            form = EtatForm()
+        return render(request, "new_etat.html", {'form': form})
     
     
 
@@ -143,3 +184,5 @@ def StoreInventoryCreate(request):
     else:
         form = StoreInventoryForm()
     return render(request, "new_product.html", {'form': form})
+
+
