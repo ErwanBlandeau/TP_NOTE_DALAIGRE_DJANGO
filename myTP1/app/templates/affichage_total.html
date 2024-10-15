@@ -228,12 +228,12 @@ Mon application DJANGO
         <tr>
             <!-- <td><a href="/monapp/product/{{p.id}}">{{ p.name }}</a></td> -->
             <td>{{ p.product.name }}</td>
-            <td>{{ p.quantity_in_stock }} </td>
-            <td>{{ p.price_in_store }} </td>
+            <td>{{ p.fournisseur.name }}</td>
+            <td>{{ p.price_in_store }} </td>    
             <td>{{ p.quantity_in_stock }} </td>
        
             <td><a href="{% url 'each-market-inventory-update' p.id %}">modifier</a></td>
-            <td><a href="{% url 'each-fournisseur-product-delete' p.id %}">supprimer</a></td>            
+            <td><a href="{% url 'each-market-inventory-delete' p.id %}">supprimer</a></td>            
         </tr>
         {% endfor %}
 
@@ -241,8 +241,4 @@ Mon application DJANGO
 </table>
 {% endif %}
 
-<p>
-    J'ai
-    {% if prdcts|length < 5 %} peu de {% elif prdcts|length < 10 %} quelques {% else %} beaucoup de {% endif %} produits
-        préférés. </p>
-        {% endblock %}
+{% endblock %}

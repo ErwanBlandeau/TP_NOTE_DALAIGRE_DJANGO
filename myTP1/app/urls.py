@@ -87,4 +87,5 @@ urlpatterns = [
     #Delete
     path("fournisseur/<pk>/delete",views.FournisseurDeleteView.as_view(), name="fournisseur-delete"),
     path("fournisseur/<pk>/product/delete",views.ProductFournisseurDeleteView.as_view(), name="each-fournisseur-product-delete"),
+    path("market/inventaire/<pk>/delete",views.StoreInventoryDeleteView.as_view(), name="each-market-inventory-delete"),
 ]

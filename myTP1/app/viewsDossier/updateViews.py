@@ -134,8 +134,8 @@ def ProductFournisseurUpdate(request, id):
 
 
 class StoreInventoryUpdateView(UpdateView):
-    model = ProductFournisseur
-    form_class = ProductFournisseurForm
+    model = StoreInventory
+    form_class = StoreInventoryForm
     template_name = "update_total.html"
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         prdct = form.save()
