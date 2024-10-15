@@ -72,20 +72,26 @@ urlpatterns = [
     path('fournisseur', views.FournisseurListView.as_view(), name="fournisseur-list"),
     path('fournisseur/<int:fournisseur_id>/product', views.ProductFournisseurListView.as_view(), name='each-fournisseur-product-list'),
     path('market/inventaire', views.StoreInventoryListView.as_view(), name='each-market-inventory-list'),
+    path('commande', views.CommandeListView.as_view(), name="commande-list"),
 
     #Add
     path("fournisseur/add",views.FournisseurCreateView.as_view(), name="fournisseur-add"),
     path("fournisseur/<pk>/product/add",views.ProductFournisseurCreateView.as_view(), name="each-fournisseur-product-add"),
     path("market/inventaire/add",views.StoreInventoryCreateView.as_view(), name="each-market-inventory-add"),
+    path('commande/create/', views.CommandeCreateView.as_view(), name='commande-create'),
+    path("etat/add/",views.EtatCreateView.as_view(), name="etat-add"),
+    
 
     #Update
     path("fournisseur/<pk>/update",views.FournisseurUpdateView.as_view(), name="fournisseur-update"),
     path("fournisseur/<pk>/product/update",views.ProductFournisseurUpdateView.as_view(), name="each-fournisseur-product-update"),
     path("market/inventaire/<pk>/update",views.StoreInventoryUpdateView.as_view(), name="each-market-inventory-update"),
+    path("commande/<pk>/update/",views.CommandeUpdateView.as_view(), name="commande-update"),
     
 
     #Delete
     path("fournisseur/<pk>/delete",views.FournisseurDeleteView.as_view(), name="fournisseur-delete"),
     path("fournisseur/<pk>/product/delete",views.ProductFournisseurDeleteView.as_view(), name="each-fournisseur-product-delete"),
     path("market/inventaire/<pk>/delete",views.StoreInventoryDeleteView.as_view(), name="each-market-inventory-delete"),
+    path("commande/<pk>/delete/",views.CommandeDeleteView.as_view(), name="commande-delete"),
 ]

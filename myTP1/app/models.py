@@ -144,15 +144,15 @@ Fournisseur : fournisseur, produit, quantite_du_produit , etat , date_creation.
 """
     
 class Commande(models.Model):
-    fournisseur = models.ForeignKey(Fournisseur, on_delete=models.CASCADE)
-    produit = models.ForeignKey(Product, on_delete=models.CASCADE)
+    produit = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=True)
+    fournisseur = models.ForeignKey(Fournisseur, on_delete=models.CASCADE, null=True, blank=True)  # On peut le rendre nullable
     quantite_du_produit = models.IntegerField(null=True, blank=True)
     etat = models.ForeignKey(Etat, on_delete=models.CASCADE)
     date_creation = models.DateTimeField(auto_now_add=True, verbose_name="Date création")
 
     class Meta:
         verbose_name = "Commande"
-        unique_together = ('fournisseur', 'produit')  # Assure qu'une commande pour le même fournisseur et produit est unique
+        unique_together = ('fournisseur', 'produit')
 
     def __str__(self):
         return f"Commande de {self.produit} par {self.fournisseur} le {self.date_creation}"
