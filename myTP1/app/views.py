@@ -29,4 +29,18 @@ class ProductAttributeDetailView(DetailView):
         context['titremenu'] = "Détail attribut"
         context['values']=ProductAttributeValue.objects.filter(product_attribute=self.object).order_by('position')
         return context
+    
+    
+class CommandeDetailView(DetailView):
+    model = Commande
+    template_name = "detail_commande.html"
+    context_object_name = "commande"
+    
+    def get_context_data(self, **kwargs):
+        context = super(CommandeDetailView, self).get_context_data(**kwargs)
+        context['titremenu'] = "Détail commande"
+        context['values']=Commande.objects.all()
+        return context
+    
+
 

@@ -1,7 +1,7 @@
 from django import forms
 
 
-from .models import Product, ProductItem, ProductAttribute, Fournisseur , Commande
+from .models import Product, ProductItem, ProductAttribute, Fournisseur , Commande , Etat ,ProductFournisseur
 
 
 class ContactUsForm(forms.Form):
@@ -15,10 +15,18 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = '__all__'
         
-
 class CommandeForm(forms.ModelForm):
     class Meta:
         model = Commande
+        fields = ['produit', 'fournisseur', 'quantite_du_produit', 'etat']  # Ajoutez ou retirez des champs selon vos besoins
+
+
+
+            
+            
+class EtatForm(forms.ModelForm):
+    class Meta:
+        model = Etat
         fields = '__all__'
 
 class ProductItemForm(forms.ModelForm):

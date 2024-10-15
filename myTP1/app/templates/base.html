@@ -65,6 +65,12 @@
             <a class="nav-link" href="{% url 'fournisseur-add' %}">Ajouter un fournisseur</a>
 
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'commande-create' %}">Ajouter une commande</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'etat-add' %}">Ajouter une etat</a>
+          </li>
           {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">Déconnexion</a>

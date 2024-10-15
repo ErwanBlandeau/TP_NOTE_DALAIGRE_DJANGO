@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Fournisseur, Product, ProductAttribute, ProductAttributeValue, ProductFournisseur, ProductItem, StoreInventory ,Commande
+from .models import Fournisseur, Product, ProductAttribute, ProductAttributeValue, ProductFournisseur, ProductItem, StoreInventory ,Commande ,Etat
 
 
 

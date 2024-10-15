@@ -42,13 +42,12 @@ urlpatterns = [
     path("product/add/",views.ProductCreateView.as_view(), name="product-add"),
     path("item/add/",views.ProductItemCreateView.as_view(), name="product-item-add"),
     path("attribute/add/",views.ProductAttributeCreateView.as_view(), name="product-attribute-add"),
-    path("commande/add/",views.CommandeCreateView.as_view(), name="commande-add"),
 
     #Update
     path("attribute/<pk>/update/",views.ProductAttributeUpdateView.as_view(), name="product-attribute-update"),
     path("item/<pk>/update/",views.ProductItemUpdateView.as_view(), name="product-item-update"),
     path("product/<pk>/update/",views.ProductUpdateView.as_view(), name="product-update"),
-
+ 
     #Delete
     path("product/<pk>/delete/",views.ProductDeleteView.as_view(), name="product-delete"),
     path("item/<pk>/delete/",views.ProductItemDeleteView.as_view(), name="product-item-delete"),
@@ -58,7 +57,6 @@ urlpatterns = [
     path('product', views.ProductListView.as_view(), name="product-list"),
     path('item', views.ProductItemListView.as_view(), name="item-list"),
     path('attribute', views.ProductAttributeListView.as_view(), name="attribute-list"),
-    path('commande', views.CommandeListView.as_view(), name="commande-list"),
 
     #Detail
     path("product/<pk>",views.ProductDetailView.as_view(), name="product-detail"),
@@ -70,13 +68,29 @@ urlpatterns = [
 
     # ListView
     path('fournisseur', views.FournisseurListView.as_view(), name="fournisseur-list"),
+    path('commande', views.CommandeListView.as_view(), name="commande-list"),
 
     #Add
     path("fournisseur/add/",views.FournisseurCreateView.as_view(), name="fournisseur-add"),
+    path("commande/add/",views.CommandeCreateView.as_view(), name="commande-add"),
+    path("etat/add/",views.EtatCreateView.as_view(), name="etat-add"),
+    
 
      #Update
     path("fournisseur/<pk>/update/",views.FournisseurUpdateView.as_view(), name="fournisseur-update"),
+    path("commande/<pk>/update/",views.CommandeUpdateView.as_view(), name="commande-update"),
 
     #Delete
     path("fournisseur/<pk>/delete/",views.FournisseurDeleteView.as_view(), name="fournisseur-delete"),
+    path("commande/<pk>/delete/",views.CommandeDeleteView.as_view(), name="commande-delete"),
+    
+    
+    #Detail
+    path("commande/<pk>",views.CommandeDetailView.as_view(), name="commande-detail"),
+    
+    
+    #autre
+    path('commande/create/', views.CommandeCreateView.as_view(), name='commande-create'),
+
+    
 ]

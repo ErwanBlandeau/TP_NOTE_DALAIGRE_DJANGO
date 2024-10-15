@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block contenu %}
+<h1>Sélectionnez un produit</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" id="bouton" style="display:none" class="btn btn-primary">Choisir ce produit</button>
+</form>
+<script>
+    document.querySelector('select').addEventListener('change', function() {
+        document.getElementById('bouton').click();
+    });
+</script>
+{% endblock %}
