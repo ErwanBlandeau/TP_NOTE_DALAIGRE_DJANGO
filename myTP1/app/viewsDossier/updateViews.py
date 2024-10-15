@@ -163,7 +163,7 @@ class StoreInventoryUpdateView(UpdateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['titremenu'] = "modifier un produit de l'inventaire" 
+        context['titremenu'] = "Modifier un produit de l'inventaire" 
         return context
     
 def StoreInventoryUpdate(request, id):
