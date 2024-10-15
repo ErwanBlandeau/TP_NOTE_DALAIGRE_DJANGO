@@ -63,8 +63,13 @@
         </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'fournisseur-add' %}">Ajouter un fournisseur</a>
-
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'each-market-inventory-list' %}">Voir l'inventaire</a>
+          </li>
+
+          
           {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">Déconnexion</a>

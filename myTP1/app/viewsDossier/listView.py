@@ -13,7 +13,7 @@ from django.shortcuts import redirect
 from app.forms import ContactUsForm, ProductAttributeForm, ProductForm, ProductItemForm
 from django.forms import BaseModelForm
 
-from ..models import Fournisseur, Product, ProductAttribute, ProductItem , Commande, ProductFournisseur
+from ..models import Fournisseur, Product, ProductAttribute, ProductItem , Commande, ProductFournisseur, StoreInventory
 
 
 class ProductItemListView(ListView):
@@ -100,3 +100,18 @@ class ProductFournisseurListView(ListView):
         context['fournisseur_id'] = fournisseur.id
 
         return context
+
+
+class StoreInventoryListView(ListView):
+    model = StoreInventory
+    template_name = "affichage_total.html"
+    context_object_name = "prdct"
+
+    def get_queryset(self ) :
+        return StoreInventory.objects.all().order_by("quantity_in_stock")    
+    
+    def get_context_data(self, **kwargs):
+        context = super(StoreInventoryListView, self).get_context_data(**kwargs)
+        context['titremenu'] = "store_inventory"
+        return context
+    
