@@ -18,6 +18,11 @@ class ProductCreateView(CreateView):
         product = form.save()
         return redirect('product-detail', product.id)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titremenu'] = "Ajouter un nouveau produit"  # ou tout autre titre que vous souhaitez
+        return context
+
 
 
 def ProductCreate(request):
@@ -39,6 +44,11 @@ class FournisseurCreateView(CreateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         product = form.save()
         return redirect('product-detail', product.id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titremenu'] = "Ajouter un nouveau fournisseur"  # ou tout autre titre que vous souhaitez
+        return context
     
 def FournisseurCreate(request):
     form = FournisseurForm()
@@ -89,6 +99,12 @@ class ProductFournisseurCreateView(CreateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         product = form.save()
         return redirect('product-detail', product.id)
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titremenu'] = "Ajouter un nouveau produit au fournisseur"  # ou tout autre titre que vous souhaitez
+        return context
     
 def ProductFournisseurCreate(request):
     form = ProductFournisseurForm()
@@ -111,6 +127,11 @@ class StoreInventoryCreateView(CreateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         product = form.save()
         return redirect('each-market-inventory-list')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titremenu'] = "Ajouter un nouveau produit dans l'inventaire"  # ou tout autre titre que vous souhaitez
+        return context
     
 def StoreInventoryCreate(request):
     form = StoreInventoryForm()

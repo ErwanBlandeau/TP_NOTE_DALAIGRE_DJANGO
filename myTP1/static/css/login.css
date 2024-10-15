@@ -1,0 +1,105 @@
+/* Style général de la page */
+body{
+    margin: 0;
+
+}
+
+main {
+    background-color: #f3f4f6;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Conteneur principal pour le formulaire */
+  .align-center {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Titre du formulaire */
+  .lead {
+    font-size: 1.8rem;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Ligne de séparation */
+  hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin-bottom: 20px;
+  }
+  
+  /* Formulaire */
+  form {
+    width: 100%;
+  }
+  
+  /* Style des labels */
+  label {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 5px;
+    text-align: left;
+    display: block;
+    font-weight: bold;
+  }
+  
+  /* Style des champs de texte */
+  .form-control {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+  }
+  
+  /* Effet lors du focus sur les champs */
+  .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+    outline: none;
+  }
+  
+  /* Style du bouton de soumission */
+  button.btn {
+    background-color: #28a745;
+    color: white;
+    font-size: 1.1rem;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Effet sur le bouton au survol */
+  button.btn:hover {
+    background-color: #218838;
+  }
+  
+  /* Espacement supplémentaire au-dessus du bouton */
+  .mt-2 {
+    margin-top: 20px;
+  }
+  
+  /* Styles responsives */
+  @media (max-width: 768px) {
+    .align-center {
+      padding: 20px;
+      max-width: 90%;
+    }
+  }
+  

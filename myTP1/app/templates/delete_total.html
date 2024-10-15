@@ -1,4 +1,13 @@
 {% extends 'base.html' %}
+
+{% load static %}
+
+{% block styles %}
+  {{ block.super }} 
+  <!-- <link rel="stylesheet" href="{% static 'css/affichageTotal.css' %}" /> -->
+{% endblock %}
+
+
 {% block contenu %}
 <form action="" method="post" >
 {% csrf_token %}

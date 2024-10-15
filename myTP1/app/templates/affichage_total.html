@@ -1,7 +1,15 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block title %}
 Mon application DJANGO
 {% endblock %}
+
+{% block styles %}
+  {{ block.super }} 
+  <link rel="stylesheet" href="{% static 'css/affichageTotal.css' %}" />
+{% endblock %}
+
 {% block menu %}
 <h1>Liste des produits</h1>
 {% endblock %}
