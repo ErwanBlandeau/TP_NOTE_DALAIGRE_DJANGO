@@ -30,7 +30,7 @@ class Product(models.Model):
     name          = models.CharField(max_length=100)
     code          = models.CharField(max_length=10, null=True, blank=True, unique=True)
     status        = models.SmallIntegerField(choices=PRODUCT_STATUS, default=0)
-    date_creation = models.DateTimeField(blank=True, verbose_name="Date création") 
+    date_creation = models.DateTimeField(blank=True, null=True ,verbose_name="Date création", default=timezone.now) 
 
     #fields = '__all__'
     exclude = ('status')

@@ -28,16 +28,6 @@ class ProductCreateView(CreateView):
 
 
 
-def ProductCreate(request):
-    form = ProductForm()
-    if request.method == 'POST':
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            product = form.save()
-            return redirect('product-detail', product.id)
-    else:
-        form = ProductForm()
-    return render(request, "new_product.html", {'form': form})
 
 class FournisseurCreateView(CreateView):
     model = Fournisseur
@@ -53,16 +43,16 @@ class FournisseurCreateView(CreateView):
         context['titremenu'] = "Ajouter un nouveau fournisseur"  # ou tout autre titre que vous souhaitez
         return context
     
-def FournisseurCreate(request):
-    form = FournisseurForm()
-    if request.method == 'POST':
-        form = FournisseurForm(request.POST)
-        if form.is_valid():
-            product = form.save()
-            return redirect('fournisseur-list')
-    else:
-        form = FournisseurForm()
-    return render(request, "new_product.html", {'form': form})
+# def FournisseurCreate(request):
+#     form = FournisseurForm()
+#     if request.method == 'POST':
+#         form = FournisseurForm(request.POST)
+#         if form.is_valid():
+#             product = form.save()
+#             return redirect('fournisseur-list')
+#     else:
+#         form = FournisseurForm()
+#     return render(request, "new_product.html", {'form': form})
     
 
 class ProductAttributeCreateView(CreateView):
@@ -124,16 +114,16 @@ class EtatCreateView(CreateView):
         return redirect('commande-list')
     
     
-    def EtatCreate(request):
-        form = EtatForm()
-        if request.method == 'POST':
-            form = EtatForm(request.POST)
-            if form.is_valid():
-                etat = form.save()
-                return redirect('commande-list')
-        else:
-            form = EtatForm()
-        return render(request, "new_etat.html", {'form': form})
+    # def EtatCreate(request):
+    #     form = EtatForm()
+    #     if request.method == 'POST':
+    #         form = EtatForm(request.POST)
+    #         if form.is_valid():
+    #             etat = form.save()
+    #             return redirect('commande-list')
+    #     else:
+    #         form = EtatForm()
+    #     return render(request, "new_etat.html", {'form': form})
     
     
 
@@ -151,16 +141,16 @@ class ProductFournisseurCreateView(CreateView):
         context['titremenu'] = "Ajouter un nouveau produit au fournisseur"  # ou tout autre titre que vous souhaitez
         return context
     
-def ProductFournisseurCreate(request):
-    form = ProductFournisseurForm()
-    if request.method == 'POST':
-        form = ProductFournisseurForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('each-fournisseur-product-list')
-    else:
-        form = ProductFournisseurForm()
-    return render(request, "new_product.html", {'form': form})
+# def ProductFournisseurCreate(request):
+#     form = ProductFournisseurForm()
+#     if request.method == 'POST':
+#         form = ProductFournisseurForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('each-fournisseur-product-list')
+#     else:
+#         form = ProductFournisseurForm()
+#     return render(request, "new_product.html", {'form': form})
 
 
 
@@ -178,15 +168,15 @@ class StoreInventoryCreateView(CreateView):
         context['titremenu'] = "Ajouter un nouveau produit dans l'inventaire"  # ou tout autre titre que vous souhaitez
         return context
     
-def StoreInventoryCreate(request):
-    form = StoreInventoryForm()
-    if request.method == 'POST':
-        form = StoreInventoryForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('each-market-inventory-list')
-    else:
-        form = StoreInventoryForm()
-    return render(request, "new_product.html", {'form': form})
+# def StoreInventoryCreate(request):
+#     form = StoreInventoryForm()
+#     if request.method == 'POST':
+#         form = StoreInventoryForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('each-market-inventory-list')
+#     else:
+#         form = StoreInventoryForm()
+#     return render(request, "new_product.html", {'form': form})
 
 

@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from app.models import StoreInventory
+from app.models import Product
 
 class StoreInventoryCreateViewTestCase(TestCase):
 
@@ -28,8 +29,19 @@ class StoreInventoryCreateViewTestCase(TestCase):
         self.assertEqual(response.status_code, 200)  # Redirect on success
 
         # Retrieve the created inventory
-        inventory = StoreInventory.objects.get(name='Test Inventory')
+        # Assuming a Product instance already exists for the test
+        product = Product.objects.create(name='Test Product')
+
+        response = self.client.post(self.url, {
+            'product': product.id,
+            'quantity_in_stock': 100,
+            'price_in_store': 9.99,
+        })
+        self.assertEqual(response.status_code, 302)  # Redirect on success
+
+        # Retrieve the created inventory
+        inventory = StoreInventory.objects.get(product=product)
         
         # Assert the redirection to the inventory list view
         self.assertRedirects(response, reverse('each-market-inventory-list'))
-        self.assertTrue(StoreInventory.objects.filter(name='Test Inventory').exists())
+        self.assertTrue(StoreInventory.objects.filter(product=product).exists())
