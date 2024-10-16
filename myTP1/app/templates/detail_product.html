@@ -9,9 +9,6 @@ Mon application DJANGO
 <h2>{{ product.name }}</h2>
 <ul>
     <li>Code : {{ product.code }}</li>
-    <li>Prix HT : {{ product.price_ht }}</li>
-    <li>Prix TTC: {{ product.price_ttc }}</li>
-    <li>Nombre du produits: {{ product.nombre_de_produit }}</li>
     <li>Date de création : {{ product.date_creation }}</li>
 </ul>
 <a href="{% url 'product-list' %}">Retour à la liste des produits</a>
