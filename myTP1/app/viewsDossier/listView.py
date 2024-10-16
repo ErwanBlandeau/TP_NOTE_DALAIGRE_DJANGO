@@ -12,8 +12,14 @@ from django.core.mail import send_mail
 from django.shortcuts import redirect
 from app.forms import ContactUsForm, ProductAttributeForm, ProductForm, ProductItemForm
 from django.forms import BaseModelForm
-
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.utils.decorators import method_decorator
 from ..models import Fournisseur, Product, ProductAttribute, ProductItem , Commande, ProductFournisseur, StoreInventory
+from app.admin import is_admin
+
+# Fonction de test pour vérifier si l'utilisateur est un administrateur
+def is_admin(user):
+    return user.is_authenticated and user.groups.filter(name='Adminserver').exists()
 
 
 class ProductItemListView(ListView):
@@ -52,19 +58,19 @@ class ProductListView(ListView):
         context['titremenu'] = "produits"
         return context
     
-    
-class CommandeListView(ListView):
-    model = Commande
-    template_name = "affichage_total.html"
-    context_object_name = "prdct"
 
-    def get_queryset(self ) :
-        return Commande.objects.all()
+# class CommandeListView(ListView):
+#     model = Commande
+#     template_name = "affichage_total.html"
+#     context_object_name = "prdct"
+
+#     def get_queryset(self ) :
+#         return Commande.objects.all()
     
-    def get_context_data(self, **kwargs):
-        context = super(CommandeListView, self).get_context_data(**kwargs)
-        context['titremenu'] = "commande"
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super(CommandeListView, self).get_context_data(**kwargs)
+#         context['titremenu'] = "commande"
+#         return context
 
 #TP NOTEE
 
@@ -112,8 +118,11 @@ class StoreInventoryListView(ListView):
         context = super(StoreInventoryListView, self).get_context_data(**kwargs)
         context['titremenu'] = "store_inventory"
         return context
-    
-    
+
+
+
+@method_decorator(login_required, name='dispatch')
+@method_decorator(user_passes_test(is_admin, login_url='home_no_param'), name='dispatch')
 class CommandeListView(ListView):
     model = Commande
     template_name = "affichage_total.html"

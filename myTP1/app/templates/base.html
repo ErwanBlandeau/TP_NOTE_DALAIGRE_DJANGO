@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_filters %}
 
 <!doctype html>
 <html lang="fr">
@@ -36,11 +37,15 @@
 
           <!-- Conditional rendering for authentication -->
           {% if user.is_authenticated %}
-          <li class="nav-item"><a class="nav-link" href="{% url 'commande-list' %}">Commande</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'commande-create' %}">Créer une Commande</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Déconnexion</a></li>
-          {% else %}
-          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Connexion</a></li>
+            {% if user|has_group:"Adminserver"%}
+              <li class="nav-item"><a class="nav-link" href="{% url 'commande-list' %}">Commande</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'commande-create' %}">Créer une Commande</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Déconnexion</a></li>
+              {% else %}
+              <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Déconnexion</a></li>
+              {% endif %}
+              {% else %}
+              <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Connexion</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Inscription</a></li>
           {% endif %}
         </ul>

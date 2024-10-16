@@ -1,11 +1,13 @@
 from django.http import HttpResponse , JsonResponse
 from django.views.generic import * 
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils.decorators import method_decorator
 
 from django.shortcuts import redirect, render
 from app.forms import FournisseurForm, ProductAttributeForm, ProductForm, ProductFournisseurForm, ProductItemForm  ,CommandeForm, StoreInventoryForm ,EtatForm
 from django.forms import BaseModelForm
+
+from app.admin import is_admin
 from ..models import Fournisseur, Product, ProductAttribute, ProductFournisseur, ProductItem  ,Commande, StoreInventory ,Etat
 
 
@@ -83,7 +85,9 @@ class ProductItemCreateView(CreateView):
         return redirect('item-list')
     
 
-@method_decorator(login_required, name="dispatch")
+
+@method_decorator(login_required, name='dispatch')
+@method_decorator(user_passes_test(is_admin, login_url='home_no_param'), name='dispatch')
 class CommandeCreateView(CreateView):
     model = Commande
     form_class = CommandeForm
