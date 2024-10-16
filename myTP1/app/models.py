@@ -31,13 +31,11 @@ class Product(models.Model):
 
     name          = models.CharField(max_length=100)
     code          = models.CharField(max_length=10, null=True, blank=True, unique=True)
-    price_ht      = models.DecimalField(max_digits=8, decimal_places=2,  null=True, blank=True, verbose_name="Prix unitaire HT")
-    price_ttc     = models.DecimalField(max_digits=8, decimal_places=2,  null=True, blank=True, verbose_name="Prix unitaire TTC")
     status        = models.SmallIntegerField(choices=PRODUCT_STATUS, default=0)
     date_creation = models.DateTimeField(blank=True, verbose_name="Date création") 
-    nombre_de_produit = models.IntegerField(null=True, blank=True, verbose_name="Nombre de produits")
+
     #fields = '__all__'
-    exclude = ('price_ttc', 'status')
+    exclude = ('status')
     
     def __str__(self):
         return "{0} {1}".format(self.name, self.code)

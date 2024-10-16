@@ -45,8 +45,7 @@ class ProductListView(ListView):
     context_object_name = "prdct"
 
     def get_queryset(self ) :
-        # return prdct.order_by("price_ttc")
-        return Product.objects.all().order_by("price_ttc")    
+        return Product.objects.all()  
     
     def get_context_data(self, **kwargs):
         context = super(ProductListView, self).get_context_data(**kwargs)
@@ -60,7 +59,6 @@ class CommandeListView(ListView):
     context_object_name = "prdct"
 
     def get_queryset(self ) :
-        # return prdct.order_by("price_ttc")
         return Commande.objects.all()
     
     def get_context_data(self, **kwargs):
