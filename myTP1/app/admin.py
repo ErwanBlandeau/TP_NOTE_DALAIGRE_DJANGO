@@ -39,9 +39,9 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ["code", "name", "price_ht", "price_ttc","tax"]
     list_editable = ["name", "price_ht", "price_ttc"]
     def tax(self, instance):
-        if instance.price_ht == None or instance.price_ht == None:
+        if instance.price_ht is None or instance.price_ttc is None:
             return None
-        return ((instance.price_ttc / instance.price_ht)-1)*100
+        return ((instance.price_ttc / instance.price_ht) - 1) * 100
     tax.short_description = "Taxes (%)"
     tax.admin_order_field = "price_ht" 
 
