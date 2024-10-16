@@ -1,6 +1,4 @@
 from django import forms
-
-
 from .models import Product, ProductFournisseur, ProductItem, ProductAttribute, Fournisseur , Commande , StoreInventory ,Etat
 
 

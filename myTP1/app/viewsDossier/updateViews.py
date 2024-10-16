@@ -1,12 +1,7 @@
-from django.http import HttpResponse, HttpResponseNotFound, Http404
+from django.http import HttpResponse
 from django.views.generic import * 
-from django.contrib.auth import authenticate, login , logout
-from django.contrib.auth.views import LoginView
-from django.contrib.auth.models import User
-from django import forms
-from django.core.mail import send_mail
 from django.shortcuts import redirect, render
-from app.forms import ContactUsForm, FournisseurForm, ProductAttributeForm, ProductForm, ProductFournisseurForm, ProductItemForm , StoreInventoryForm , CommandeForm
+from app.forms import FournisseurForm, ProductAttributeForm, ProductForm, ProductFournisseurForm, ProductItemForm , StoreInventoryForm , CommandeForm
 from django.forms import BaseModelForm
 from ..models import Fournisseur, Product, ProductAttribute, ProductFournisseur, ProductItem, StoreInventory , Commande
 from django.contrib.auth.decorators import login_required

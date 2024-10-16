@@ -61,3 +61,5 @@ class RegisterViewTestCase(TestCase):
         # Vérifier que la réponse est 200 OK et que le bon template est utilisé
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'register.html')  # Vérifiez que vous restez sur la page d'inscription
+
+

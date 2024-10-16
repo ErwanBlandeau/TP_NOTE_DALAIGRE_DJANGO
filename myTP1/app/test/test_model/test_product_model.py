@@ -9,11 +9,8 @@ class ProductTestCase(TestCase):
         self.product = Product.objects.create(
             name="T-Shirt", 
             code="TS001",
-            price_ht=19.99,
-            price_ttc=23.99,
             status=1,
             date_creation=timezone.now(),
-            nombre_de_produit=100
         )
 
     def test_product_creation(self):

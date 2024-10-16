@@ -6,3 +6,4 @@ pip                ==  24.0
 pydotplus          ==  2.0.2
 pyparsing         ==   3.1.4
 sqlparse           ==  0.5.1
+covarage

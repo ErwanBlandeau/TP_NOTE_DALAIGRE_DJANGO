@@ -41,11 +41,8 @@ class ProductDetailViewTestCase(TestCase):
         self.product = Product.objects.create(
             name="T-Shirt",
             code="TS001",
-            price_ht=20.00,
-            price_ttc=30.00,
             status=1,
             date_creation=timezone.now(),
-            nombre_de_produit=100
         )
 
     def test_product_detail_view(self):
@@ -55,3 +52,4 @@ class ProductDetailViewTestCase(TestCase):
         self.assertTemplateUsed(response, 'detail_product.html')
         self.assertEqual(response.context['product'], self.product)
         self.assertEqual(response.context['titremenu'], "Détail produit")
+

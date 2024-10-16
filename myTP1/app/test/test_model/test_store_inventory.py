@@ -8,20 +8,11 @@ class StoreInventoryTestCase(TestCase):
         self.product = Product.objects.create(
             name="T-Shirt", 
             code="TS001",
-            price_ht=19.99,
-            price_ttc=23.99,
             status=1,
             date_creation=timezone.now(),
-            nombre_de_produit=100
-        )
-        self.fournisseur = Fournisseur.objects.create(
-            name="Supplier A",
-            code="SUP001",
-            email="supplierA@example.com"
         )
         self.store_inventory = StoreInventory.objects.create(
             product=self.product,
-            fournisseur=self.fournisseur,
             quantity_in_stock=50,
             price_in_store=22.99
         )

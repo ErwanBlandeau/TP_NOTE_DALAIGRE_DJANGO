@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from .models import Etat, Fournisseur, Product, ProductAttribute, ProductAttributeValue, ProductFournisseur, ProductItem, StoreInventory ,Commande
 
 
@@ -30,36 +29,6 @@ def set_product_offline(modeladmin, request, queryset):
  queryset.update(status=0)
 set_product_offline.short_description = "Mettre hors ligne"
 
-<<<<<<< HEAD
-class ProductAdmin(admin.ModelAdmin):
-    model = Product
-    inlines = [ProductItemAdmin,]
-    list_filter = (ProductFilter,)
-    date_hierarchy = 'date_creation'
-    actions = [set_product_online, set_product_offline]
-    list_display = ["code", "name", "price_ht", "price_ttc","tax"]
-    list_editable = ["name", "price_ht", "price_ttc"]
-    def tax(self, instance):
-        if instance.price_ht is None or instance.price_ttc is None:
-            return None
-        return ((instance.price_ttc / instance.price_ht) - 1) * 100
-    tax.short_description = "Taxes (%)"
-    tax.admin_order_field = "price_ht" 
-=======
-# class ProductAdmin(admin.ModelAdmin):
-#     model = Product
-#     inlines = [ProductItemAdmin,]
-#     list_filter = (ProductFilter,)
-#     date_hierarchy = 'date_creation'
-#     actions = [set_product_online, set_product_offline]
-#     list_display = ["code", "name","tax"]
-#     list_editable = ["name"]
-#     def tax(self, instance):
-#         if instance.price_ht == None or instance.price_ht == None:
-#             return None
-#         return ((instance.price_ttc / instance.price_ht)-1)*100
-#     tax.short_description = "Taxes (%)"
->>>>>>> fada6b26f65009af1af9703e074a8d19c0934113
 
 admin.site.register(Product)
 admin.site.register(ProductItem)
