@@ -75,13 +75,11 @@ class ProductFournisseur(models.Model):
     
 class StoreInventory(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Produit")
-    fournisseur = models.ForeignKey(Fournisseur, on_delete=models.CASCADE, verbose_name="Fournisseur")
     quantity_in_stock = models.IntegerField(default=0, verbose_name="Quantité en stock")
     price_in_store = models.DecimalField(max_digits=8, decimal_places=2, verbose_name="Prix en magasin")
 
     class Meta:
         verbose_name = "Inventaire Magasin"
-        unique_together = ('product', 'fournisseur')
     
     def __str__(self):
         return f"{self.product.name} fournit {self.product.name} (Prix: {self.price_in_store} , Quantite: {self.quantity_in_stock})"
@@ -153,7 +151,6 @@ class Commande(models.Model):
 
     class Meta:
         verbose_name = "Commande"
-        unique_together = ('fournisseur', 'produit')
 
     def __str__(self):
         return f"Commande de {self.produit} par {self.fournisseur} le {self.date_creation}"

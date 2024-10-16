@@ -1,17 +1,27 @@
 {% extends 'base.html' %}
+
+{% load static %}
+{% block styles %}
+  {{ block.super }} 
+  <link rel="stylesheet" href="{% static 'css/form.css' %}" />
+{% endblock %}
+
 {% block contenu %}
 <h1>Créer une Commande pour {{ form.initial.produit.name }}</h1>
 <form id="commande-form" method="post">
     {% csrf_token %}
     
+    <label for="nom_produit">Nom produit:</label>
     {{ form.produit }}
     
     <label for="id_fournisseur">Fournisseur:</label>
     <select name="fournisseur" id="id_fournisseur">
        
     </select>
-    
+    <label for="quantite">Quantité:</label>
     {{ form.quantite_du_produit }}  <!-- Vérifiez que ce champ est correctement orthographié -->
+    
+    <label for="etat">Etat:</label>
     {{ form.etat }}
 
     <input type="hidden" name="produit_id" id="produit_id" value="{{ form.initial.produit.id }}">

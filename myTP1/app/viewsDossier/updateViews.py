@@ -9,6 +9,9 @@ from django.shortcuts import redirect, render
 from app.forms import ContactUsForm, FournisseurForm, ProductAttributeForm, ProductForm, ProductFournisseurForm, ProductItemForm , StoreInventoryForm , CommandeForm
 from django.forms import BaseModelForm
 from ..models import Fournisseur, Product, ProductAttribute, ProductFournisseur, ProductItem, StoreInventory , Commande
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 
 class ProductUpdateView(UpdateView):
     model = Product
@@ -18,10 +21,14 @@ class ProductUpdateView(UpdateView):
         product = form.save()
         return redirect('product-detail', product.id)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titremenu'] = "modifier un produit" 
+        return context
+
 
 def ProductUpdate(request, id):
     prdct = Product.objects.get(id=id)
-    print(prdct)
     if request.method == 'POST':
         form = ProductForm(request.POST, instance=prdct)
         if form.is_valid():
@@ -69,6 +76,12 @@ class ProductItemUpdateView(UpdateView):
         return redirect('item-list')
 
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titremenu'] = "modifier un item produit" 
+        return context
+
+    
 
 def ProductItemUpdate(request, id):
     prdct = ProductItem.objects.get(id=id)
@@ -92,6 +105,11 @@ class FournisseurUpdateView(UpdateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         form.save()
         return redirect('fournisseur-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titremenu'] = "modifier un fournisseur" 
+        return context
     
     
 def FournisseurUpdate(request, id):
@@ -116,6 +134,11 @@ class ProductFournisseurUpdateView(UpdateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         prdct = form.save()
         return redirect('each-fournisseur-product-list', prdct.fournisseur.id)    
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titremenu'] = "modifier un produit du fournisseur" 
+        return context
     
 def ProductFournisseurUpdate(request, id):
     fournisseur = ProductFournisseur.objects.get(id=id)
@@ -141,6 +164,11 @@ class StoreInventoryUpdateView(UpdateView):
         prdct = form.save()
         return redirect('each-market-inventory-list')    
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titremenu'] = "Modifier un produit de l'inventaire" 
+        return context
+    
 def StoreInventoryUpdate(request, id):
     fournisseur = StoreInventory.objects.get(id=id)
     if request.method == 'POST':
@@ -154,25 +182,48 @@ def StoreInventoryUpdate(request, id):
         form = StoreInventoryForm(instance=fournisseur)
     return render(request,'product-update.html', {'form': form})
 
-
+@method_decorator(login_required, name="dispatch")
 class CommandeUpdateView(UpdateView):
     model = Commande
     form_class = CommandeForm
     template_name = "update_total.html"
-    def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        form.save()
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['is_update'] = True
+        return kwargs
+
+    def form_valid(self, form):
+        commande = form.save(commit=False)
+        if commande.etat.nomEtat == 'recu':
+            print("coucou if")
+            product = commande.produit
+            quantity = commande.quantite_du_produit
+
+            # Check if the product exists in StoreInventory
+            store_inventory, created = StoreInventory.objects.get_or_create(
+                product=product,
+                defaults={'quantity_in_stock': quantity}
+            )
+
+            if not created:
+                # Update the quantity in stock if the product already exists
+                store_inventory.quantity_in_stock += quantity
+                store_inventory.save()
+
+        commande.save()
         return redirect('commande-list')
     
     
-def CommandeUpdate(request, id):
-    commande = Commande.objects.get(id=id)
-    if request.method == 'POST':
-        form = FournisseurForm(request.POST, instance=commande)
-        if form.is_valid():
-            # mettre à jour le produit existant dans la base de données
-            form.save()
-            # rediriger vers la page détaillée du produit que nous venons de mettre à jour
-            return redirect('commande-list')
-    else:
-        form = CommandeForm(instance=commande)
-    return render(request,'product-update.html', {'form': form})
+# def CommandeUpdate(request, id):
+#     commande = Commande.objects.get(id=id)
+#     if request.method == 'POST':
+#         form = CommandeForm(request.POST, instance=commande)
+#         if form.is_valid():
+#             # mettre à jour le produit existant dans la base de données
+#             form.save()
+#             # rediriger vers la page détaillée du produit que nous venons de mettre à jour
+#             return redirect('commande-list')
+#     else:
+#         form = CommandeForm(instance=commande, is_update=True)
+#     return render(request,'product-update.html', {'form': form})

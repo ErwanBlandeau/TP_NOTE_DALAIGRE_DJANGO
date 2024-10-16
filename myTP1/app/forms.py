@@ -51,6 +51,15 @@ class CommandeForm(forms.ModelForm):
     class Meta:
         model = Commande
         fields = ['produit', 'fournisseur', 'quantite_du_produit', 'etat']  # Ajoutez ou retirez des champs selon vos besoins
+        
+    def __init__(self, *args, **kwargs):
+        is_update = kwargs.pop('is_update', False)
+        super(CommandeForm, self).__init__(*args, **kwargs)
+        if is_update:
+            # List the fields you want to make read-only
+            read_only_fields = ['produit', 'fournisseur']
+            for field in read_only_fields:
+                self.fields[field].disabled = True
             
 class EtatForm(forms.ModelForm):
     class Meta:

@@ -1,9 +1,10 @@
 from django.http import HttpResponse , JsonResponse
 from django.views.generic import * 
-JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 from django.shortcuts import redirect, render
-
+from django.contrib import messages
 from app.forms import FournisseurForm, ProductAttributeForm, ProductForm, ProductFournisseurForm, ProductItemForm  ,CommandeForm, StoreInventoryForm ,EtatForm
 from django.forms import BaseModelForm
 from ..models import Fournisseur, Product, ProductAttribute, ProductFournisseur, ProductItem  ,Commande, StoreInventory ,Etat
@@ -18,6 +19,11 @@ class ProductCreateView(CreateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         product = form.save()
         return redirect('product-detail', product.id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titremenu'] = "Ajouter un nouveau produit"  # ou tout autre titre que vous souhaitez
+        return context
 
 
 
@@ -40,6 +46,11 @@ class FournisseurCreateView(CreateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         product = form.save()
         return redirect('product-detail', product.id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titremenu'] = "Ajouter un nouveau fournisseur"  # ou tout autre titre que vous souhaitez
+        return context
     
 def FournisseurCreate(request):
     form = FournisseurForm()
@@ -72,7 +83,8 @@ class ProductItemCreateView(CreateView):
         form.save()
         return redirect('item-list')
     
-    
+
+@method_decorator(login_required, name="dispatch")
 class CommandeCreateView(CreateView):
     model = Commande
     form_class = CommandeForm
@@ -92,15 +104,14 @@ class CommandeCreateView(CreateView):
             return render(request, "new_commande.html", {'form': form})
 
     def form_valid(self, form):
-        print(form)
         form.save()  # Sauvegarder la commande
-        return redirect('commande-list') 
+        return redirect('commande-list')
 
 
 
     
     
-    
+
 class EtatCreateView(CreateView):
     model = Etat
     form_class = EtatForm
@@ -130,6 +141,12 @@ class ProductFournisseurCreateView(CreateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         product = form.save()
         return redirect('product-detail', product.id)
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titremenu'] = "Ajouter un nouveau produit au fournisseur"  # ou tout autre titre que vous souhaitez
+        return context
     
 def ProductFournisseurCreate(request):
     form = ProductFournisseurForm()
@@ -152,6 +169,11 @@ class StoreInventoryCreateView(CreateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         product = form.save()
         return redirect('each-market-inventory-list')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titremenu'] = "Ajouter un nouveau produit dans l'inventaire"  # ou tout autre titre que vous souhaitez
+        return context
     
 def StoreInventoryCreate(request):
     form = StoreInventoryForm()

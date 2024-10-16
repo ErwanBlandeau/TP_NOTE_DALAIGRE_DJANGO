@@ -1,7 +1,8 @@
 from django.views.generic import * 
 from django.shortcuts import redirect
 from ..models import Fournisseur, Product, ProductAttribute, ProductFournisseur, ProductItem, StoreInventory , Commande
-
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 
 class ProductDeleteView(DeleteView):
@@ -24,7 +25,6 @@ class ProductItemDeleteView(DeleteView):
     def get_context_data(self, **kwargs):
         context = super(ProductItemDeleteView, self).get_context_data(**kwargs)
         context['titremenu'] = "item"
-        print(context)
         return context
     def post(self, request, **kwargs):
         product = self.get_object()
@@ -85,13 +85,13 @@ class StoreInventoryDeleteView(DeleteView):
         product.delete()
         return redirect('each-market-inventory-list')
     
+@method_decorator(login_required, name="dispatch")
 class CommandeDeleteView(DeleteView):
     model = Commande
     template_name = "delete_total.html"
     def get_context_data(self, **kwargs):
         context = super(CommandeDeleteView, self).get_context_data(**kwargs)
         context['titremenu'] = "commande"
-        print(context)
         return context
     def post(self, request, **kwargs):
         commande = self.get_object()
