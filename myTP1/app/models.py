@@ -95,7 +95,7 @@ class ProductItem(models.Model):
     color   = models.CharField(max_length=100)
     code    = models.CharField(max_length=10, null=True, blank=True, unique=True)
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
-    attributes  = models.ManyToManyField("ProductAttributeValue", related_name="product_item", null=True, blank=True)
+    attributes  = models.ManyToManyField("ProductAttributeValue", related_name="product_item", blank=True)
        
     def __str__(self):
         return "{0} {1}".format(self.color, self.code)
