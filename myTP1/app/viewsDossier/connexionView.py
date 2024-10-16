@@ -18,7 +18,7 @@ class ConnectView(LoginView):
         user = authenticate(username=username, password=password)
         if user is not None and user.is_active:
             login(request, user)
-            return render(request, 'home.html',{'titreh1':"hello "+username+", you're connected"})
+            return render(request, 'simplePage.html',{'titreh1':"hello "+username+", you're connected"})
         else:
             return render(request, 'register.html')
         

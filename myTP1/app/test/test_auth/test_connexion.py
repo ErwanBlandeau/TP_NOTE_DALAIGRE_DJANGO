@@ -14,7 +14,7 @@ class ConnectViewTestCase(TestCase):
         """Test successful login with correct credentials."""
         response = self.client.post(reverse('login'), {'username': self.username, 'password': self.password})
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'home.html')
+        self.assertTemplateUsed(response, 'simplePage.html')
         self.assertContains(response, f"hello "+self.username)
 
     def test_login_with_incorrect_credentials(self):
