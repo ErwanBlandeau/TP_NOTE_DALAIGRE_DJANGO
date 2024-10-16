@@ -25,7 +25,6 @@ class ProductItemDeleteView(DeleteView):
     def get_context_data(self, **kwargs):
         context = super(ProductItemDeleteView, self).get_context_data(**kwargs)
         context['titremenu'] = "item"
-        print(context)
         return context
     def post(self, request, **kwargs):
         product = self.get_object()
@@ -93,7 +92,6 @@ class CommandeDeleteView(DeleteView):
     def get_context_data(self, **kwargs):
         context = super(CommandeDeleteView, self).get_context_data(**kwargs)
         context['titremenu'] = "commande"
-        print(context)
         return context
     def post(self, request, **kwargs):
         commande = self.get_object()

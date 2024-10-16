@@ -187,20 +187,43 @@ class CommandeUpdateView(UpdateView):
     model = Commande
     form_class = CommandeForm
     template_name = "update_total.html"
-    def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        form.save()
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['is_update'] = True
+        return kwargs
+
+    def form_valid(self, form):
+        commande = form.save(commit=False)
+        if commande.etat.nomEtat == 'recu':
+            print("coucou if")
+            product = commande.produit
+            quantity = commande.quantite_du_produit
+
+            # Check if the product exists in StoreInventory
+            store_inventory, created = StoreInventory.objects.get_or_create(
+                product=product,
+                defaults={'quantity_in_stock': quantity}
+            )
+
+            if not created:
+                # Update the quantity in stock if the product already exists
+                store_inventory.quantity_in_stock += quantity
+                store_inventory.save()
+
+        commande.save()
         return redirect('commande-list')
     
     
-def CommandeUpdate(request, id):
-    commande = Commande.objects.get(id=id)
-    if request.method == 'POST':
-        form = FournisseurForm(request.POST, instance=commande)
-        if form.is_valid():
-            # mettre à jour le produit existant dans la base de données
-            form.save()
-            # rediriger vers la page détaillée du produit que nous venons de mettre à jour
-            return redirect('commande-list')
-    else:
-        form = CommandeForm(instance=commande)
-    return render(request,'product-update.html', {'form': form})
+# def CommandeUpdate(request, id):
+#     commande = Commande.objects.get(id=id)
+#     if request.method == 'POST':
+#         form = CommandeForm(request.POST, instance=commande)
+#         if form.is_valid():
+#             # mettre à jour le produit existant dans la base de données
+#             form.save()
+#             # rediriger vers la page détaillée du produit que nous venons de mettre à jour
+#             return redirect('commande-list')
+#     else:
+#         form = CommandeForm(instance=commande, is_update=True)
+#     return render(request,'product-update.html', {'form': form})
