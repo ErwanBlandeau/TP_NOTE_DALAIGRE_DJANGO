@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+# settings.py
 
 # Application definition
 
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'app',
     'debug_toolbar',
     'django_extensions',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

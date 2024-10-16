@@ -16,9 +16,29 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from app.views import (
+    ProductViewSet, FournisseurViewSet, ProductFournisseurViewSet, StoreInventoryViewSet,
+    ProductItemViewSet, ProductAttributeViewSet, ProductAttributeValueViewSet, EtatViewSet,
+    CommandeViewSet
+)
 
+# Configure the router
+router = DefaultRouter()
+router.register(r'products', ProductViewSet)
+router.register(r'fournisseurs', FournisseurViewSet)
+router.register(r'product-fournisseurs', ProductFournisseurViewSet)
+router.register(r'store-inventories', StoreInventoryViewSet)
+router.register(r'product-items', ProductItemViewSet)
+router.register(r'product-attributes', ProductAttributeViewSet)
+router.register(r'product-attribute-values', ProductAttributeValueViewSet)
+router.register(r'etats', EtatViewSet)
+router.register(r'commandes', CommandeViewSet)
+
+# Define the URL patterns
 urlpatterns = [
-path("monapp/", include("app.urls")),
-path('admin/', admin.site.urls),
-path("__debug__/", include("debug_toolbar.urls")),
-] 
+    path('admin/', admin.site.urls),
+    path('__debug__/', include('debug_toolbar.urls')),
+    path('api/', include(router.urls)),  # Include the router URLs
+    path('monapp/', include('app.urls')),  # Include other app URLs
+]
