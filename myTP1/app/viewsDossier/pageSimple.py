@@ -32,7 +32,7 @@ from ..models import Product, ProductAttribute, ProductItem
 
 
 class HomeView(TemplateView):
-    template_name = "home.html"
+    template_name = "simplePage.html"
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         context['titreh1'] = "Hello DJANGO"
@@ -41,7 +41,7 @@ class HomeView(TemplateView):
         return render(request, self.template_name)
     
 class AboutView(TemplateView):
-    template_name = "home.html"
+    template_name = "simplePage.html"
     def get_context_data(self, **kwargs):
         context = super(AboutView, self).get_context_data(**kwargs)
         context['titreh1'] = "About us..."
@@ -51,7 +51,7 @@ class AboutView(TemplateView):
     
 
 class ContactView(TemplateView):
-    template_name = "home.html"
+    template_name = "simplePage.html"
     def get_context_data(self, **kwargs):
         context = super(ContactView, self).get_context_data(**kwargs)
         context['titreh1'] = "Contact us..."
@@ -60,7 +60,7 @@ class ContactView(TemplateView):
         return render(request, self.template_name)
 
 class HomeParamView(TemplateView):
-    template_name = "home.html"
+    template_name = "simplePage.html"
     def get_context_data(self, **kwargs):
         context = super(HomeParamView, self).get_context_data(**kwargs
         )
