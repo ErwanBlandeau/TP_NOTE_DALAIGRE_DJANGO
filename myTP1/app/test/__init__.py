@@ -3,3 +3,4 @@ from .test_admin import *
 from .test_views import *
 from .test_auth import *
 from .test_create import *
+from .test_delete import *
