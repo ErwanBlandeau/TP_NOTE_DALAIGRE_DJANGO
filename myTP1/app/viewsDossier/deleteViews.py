@@ -69,6 +69,7 @@ class ProductFournisseurDeleteView(DeleteView):
         return context
     def post(self, request, **kwargs):
         product = self.get_object()
+        print(product)
         product.delete()
         return redirect('each-fournisseur-product-list', product.id)
     
